@@ -1,5 +1,5 @@
 VISARJAN GHAT WATCH: brief for the BMC officer
-Durga Visarjan: 20 October 2026
+Next visarjan: Durga Visarjan, 20 October 2026
 
 Basis: MPPCB water tests at 7 Bhopal ghats, 2023 to 2025, compared with CPCB class B (outdoor bathing) limits: dissolved oxygen (DO) 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5.
 
@@ -14,10 +14,10 @@ Ranking (relative priority for extra cleaning, aeration and testing):
 6. Khatlapura ghat, score 22/100: DO below limit in 8 of 18 tests, BOD above limit in 15 of 17 tests.
 7. Prempura ghat, score 13/100: DO below limit in 3 of 18 tests, BOD above limit in 9 of 15 tests.
 
-Suggested before 20 October:
-- Bairagarh (Sant Hirdaram) kund: Prioritise aeration or other oxygen support before immersion. Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit). Test before 20 October to fill the data gaps.
+Suggested before the next visarjan:
+- Bairagarh (Sant Hirdaram) kund: Prioritise aeration or other oxygen support before immersion. Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit). Test before the next visarjan to fill the data gaps.
   Data gaps: No Durga 2025 table in the MPPCB report, so there is no data for it. Ganesh 2025, before immersion and one week after: DO, BOD, pH not sampled.
-- Malikhedi kund: Prioritise aeration or other oxygen support before immersion. Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit). Test before 20 October to fill the data gaps.
+- Malikhedi kund: Prioritise aeration or other oxygen support before immersion. Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit). Test before the next visarjan to fill the data gaps.
   Data gaps: No Durga 2025 table in the MPPCB report, so there is no data for it. Ganesh 2025, before immersion and one week after: DO, BOD, pH not sampled.
 - Shahpura lake ghat: Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).
 - Any new ghat has no readings in this data. Take a baseline test before it is used.
