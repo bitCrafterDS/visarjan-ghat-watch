@@ -1,0 +1,55 @@
+{
+  "_help": "Edit this file on GitHub (pencil icon) to change the Upcoming visarjans and Updates shown on the front page. Keep the commas and quotes exactly as they are. Dates are YYYY-MM-DD. The page hides visarjans whose date has passed.",
+  "visarjans": [
+    {
+      "date": "2026-10-20",
+      "name_en": "Durga Visarjan",
+      "name_hi": "दुर्गा विसर्जन",
+      "note_en": "Vijayadashami",
+      "note_hi": "विजयादशमी",
+      "source": "https://www.drikpanchang.com/navratri/durga-puja/durga-visarjan-date-time.html?year=2026"
+    },
+    {
+      "date": "2027-09-14",
+      "name_en": "Ganesh Visarjan",
+      "name_hi": "गणेश विसर्जन",
+      "note_en": "Anant Chaturdashi",
+      "note_hi": "अनंत चतुर्दशी",
+      "source": "https://www.drikpanchang.com/festivals/ganesh-visarjan/ganesh-visarjan-date-time.html?year=2027"
+    },
+    {
+      "date": "2027-10-09",
+      "name_en": "Durga Visarjan",
+      "name_hi": "दुर्गा विसर्जन",
+      "note_en": "Vijayadashami",
+      "note_hi": "विजयादशमी",
+      "source": "https://www.drikpanchang.com/navratri/durga-puja/durga-visarjan-date-time.html?year=2027"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-10-11",
+      "title_en": "Test readings for 2023 to 2025 are loaded",
+      "title_hi": "2023 से 2025 की जाँच के आँकड़े जोड़े गए",
+      "text_en": "7 Bhopal ghats, 1,524 MPPCB readings, each linked to its report page. Readings after 2025 are not in the tool yet.",
+      "text_hi": "भोपाल के 7 घाट, MPPCB के 1,524 आँकड़े, हर एक अपने रिपोर्ट-पेज से जुड़ा। 2025 के बाद के आँकड़े अभी टूल में नहीं हैं।",
+      "link": ""
+    },
+    {
+      "date": "2026-10-11",
+      "title_en": "New BMC ghats have no test readings yet",
+      "title_hi": "नगर निगम के नए घाटों की जाँच के आँकड़े अभी नहीं हैं",
+      "text_en": "This tool can only rank ghats that MPPCB has tested. A new ghat can be added once it has readings.",
+      "text_hi": "यह टूल केवल उन्हीं घाटों को क्रम में रख सकता है जिनकी MPPCB ने जाँच की है। नए घाट के आँकड़े आने पर उसे जोड़ा जा सकता है।",
+      "link": ""
+    },
+    {
+      "date": "2026-02-26",
+      "title_en": "NGT immersion ban: Upper and Lower Lakes",
+      "title_hi": "NGT का आदेश: ऊपरी और निचले तालाब में विसर्जन पर रोक",
+      "text_en": "Immersion is to move away from the lakes, and BMC is building new dedicated ghats (Free Press Journal, 26 Feb 2026). Which ghats are used is for BMC to confirm.",
+      "text_hi": "विसर्जन तालाबों से हटकर होगा और नगर निगम नए समर्पित घाट बना रहा है (फ्री प्रेस जर्नल, 26 फ़रवरी 2026)। कौन-से घाट काम में आएँगे, यह नगर निगम तय करेगा।",
+      "link": "https://www.freepressjournal.in/amp/bhopal/mp-news-idol-immersion-to-shift-from-lakes-to-safer-sites-ngt-ban-pushes-bmc-to-build-4-dedicated-ghats"
+    }
+  ]
+}
