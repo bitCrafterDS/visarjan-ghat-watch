@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GhatWise | Bhopal visarjan ghat water-risk watch</title>
+<link rel="icon" type="image/png" href="__FAVICON__">
 <meta name="description" content="GhatWise ranks Bhopal's visarjan ghats by water-test risk, with the report page behind every number. For BMC officers and the public.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
 <style>
@@ -151,9 +152,13 @@ button.primary { background:linear-gradient(135deg,var(--accent),var(--accent2))
 button.primary:hover { filter:brightness(1.06); }
 button.ghost { border-radius:999px; background:var(--glass); }
 .seg button[aria-pressed="true"] { background:linear-gradient(135deg,var(--accent),var(--accent2)); border-color:transparent; font-weight:600; }
-.hero { background:var(--hero); border:1px solid var(--line); border-radius:26px; padding:26px 22px; box-shadow:var(--shadow); margin-bottom:6px; }
+.hero { display:grid; grid-template-columns:1fr auto; gap:18px; align-items:center; background:var(--hero); border:1px solid var(--line); border-radius:26px; padding:26px 22px; box-shadow:var(--shadow); margin-bottom:6px; }
 .hero h1 { font-size:clamp(1.55rem,5vw,2.4rem); line-height:1.15; letter-spacing:-.02em; margin:6px 0 8px; }
 .hero p { max-width:640px; }
+.brandimg { width:44px; height:44px; border-radius:50%; display:block; box-shadow:0 6px 18px -8px rgba(0,0,0,.5); background:#faf1e2; }
+.brandimg.sm { width:30px; height:30px; display:inline-block; vertical-align:middle; }
+.herologo { width:170px; height:170px; border-radius:50%; box-shadow:var(--shadow-lg); background:#faf1e2; }
+@media (max-width:640px) { .hero { grid-template-columns:1fr; } .herologo { order:-1; width:104px; height:104px; } }
 .kicker { display:inline-block; font-size:.75rem; letter-spacing:.09em; text-transform:uppercase; font-weight:700; color:var(--accent); border:1px solid var(--line); border-radius:999px; padding:3px 12px; background:var(--glass); }
 .stat b { font-size:2.1rem; letter-spacing:-.02em; }
 .h2 { letter-spacing:-.01em; }
@@ -549,9 +554,12 @@ function homeView() {
   const left = n => (n === 0 ? t('up_today') : n === 1 ? t('up_tomorrow') : fill(t('up_days'), { n }));
   return `
   <section class="hero">
-    <span class="kicker">${esc(t('brand_tag'))}</span>
-    <h1>${esc(t('home_hero_h'))}</h1>
-    <p>${esc(t('home_hero_p'))}</p>
+    <div>
+      <span class="kicker">${esc(t('brand_tag'))}</span>
+      <h1>${esc(t('home_hero_h'))}</h1>
+      <p>${esc(t('home_hero_p'))}</p>
+    </div>
+    <img class="herologo" src="${esc(D.meta.logo)}" alt="GhatWise" width="170" height="170">
   </section>
   <div class="aud">
     <div class="audcard">
@@ -610,7 +618,7 @@ function footerView() {
   const link = (u, l) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)}</a>`;
   return `
   <footer class="sitefooter"><div class="footin">
-    <div class="fcol"><div class="fbrand">🌊 ${esc(t('title'))}</div><p>${esc(t('footer_about'))}</p></div>
+    <div class="fcol"><div class="fbrand"><img class="brandimg sm" src="${esc(D.meta.logo)}" alt="" width="30" height="30"> ${esc(t('title'))}</div><p>${esc(t('footer_about'))}</p></div>
     <div class="fcol"><b>${esc(t('footer_data'))}</b>
       ${[2023, 2024, 2025].map(y => link(r[y].url, r[y].name)).join('')}
       ${link('https://cpcb.gov.in/water-quality-criteria/', t('footer_cpcb'))}
@@ -627,7 +635,7 @@ function shell() {
   return `
   <header class="topbar"><div class="topin">
     <button class="brand" data-go="home" aria-label="${esc(t('tab_home'))}">
-      <span class="brandmark">🌊</span>
+      <img class="brandimg" src="${esc(D.meta.logo)}" alt="GhatWise logo" width="44" height="44">
       <span class="brandtxt"><b>${esc(t('title'))}</b><small>${esc(t('brand_tag'))}</small></span>
     </button>
     <nav class="tabs" role="tablist">
