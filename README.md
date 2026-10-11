@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| **Team** | `<TEAM NAME>` |
-| **Members** | `<NAME 1>`, `<NAME 2>`, `<NAME 3>`, `<NAME 4>` |
+| **Team** | `<PromptPirates>` |
+| **Members** | `<Srishty Singh>`, `<Deepanshu Singh>`, `<Kartik Singh>`, |
 | **Track** | Track 2: Visarjan Ghat Watch |
 | **The one user** | The Bhopal Municipal Corporation (BMC) officer who plans Durga visarjan at the ghats |
 | **The one outcome** | Before 20 October 2026, the officer knows which ghats need extra cleaning, aeration and testing first, and can forward a short Hindi and English brief |
