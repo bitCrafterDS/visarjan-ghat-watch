@@ -3,7 +3,7 @@
   var L = function (en, hi) { return lang === 'hi' ? hi : en; };
   var Q = '';
   var stream = null, scanTimer = null;
-  var ISSUES = [['waste', 'Floating waste or offerings', 'तैरता कचरा या पूजन-सामग्री'], ['debris', 'Idol debris on the bank', 'किनारे पर मूर्ति का मलबा'],
+  var _unusedIssues = [['waste', 'Floating waste or offerings', 'तैरता कचरा या पूजन-सामग्री'], ['debris', 'Idol debris on the bank', 'किनारे पर मूर्ति का मलबा'],
     ['foam', 'Oil, foam or colour in the water', 'पानी में तेल, झाग या रंग'], ['smell', 'Bad smell', 'बदबू'], ['fish', 'Dead fish', 'मरी मछलियाँ'], ['other', 'Something else', 'कुछ और']];
   var gn = function (g) { return g['name_' + lang] || g.name_en; };
   var low = function (s) { return String(s || '').toLowerCase(); };
@@ -98,36 +98,9 @@
     s.onload = go; s.onerror = go; document.head.appendChild(s);
   }
 
-  function openReport(i) {
-    var g = D.ghats[i]; if (!g) return;
-    var opts = D.ghats.map(function (x, k) { return '<option value="' + k + '"' + (k === i ? ' selected' : '') + '>' + esc(gn(x)) + '</option>'; }).join('') +
-      '<option value="x">' + esc(L('Other or new ghat', 'अन्य या नया घाट')) + '</option>';
-    var iss = ISSUES.map(function (x) { return '<option value="' + x[0] + '">' + esc(lang === 'hi' ? x[2] : x[1]) + '</option>'; }).join('');
-    var o = overlay('<h2>' + esc(L('Report a ghat', 'घाट की शिकायत')) + '</h2>' +
-      '<p class="note">' + esc(L('Tell BMC about a problem you can see. Photos of people are not needed. This page has no server, so the report goes out by WhatsApp: you press send yourself. Nothing is stored or reaches BMC automatically.', 'जो समस्या दिख रही है नगर निगम को बताइए। लोगों की फ़ोटो ज़रूरी नहीं। इस पेज का कोई सर्वर नहीं है, इसलिए शिकायत WhatsApp से जाती है: भेजना आपको खुद दबाना है। कुछ अपने-आप सहेजा या नगर निगम तक नहीं पहुँचता।')) + '</p>' +
-      '<label>' + esc(L('Ghat', 'घाट')) + '</label><select id="gwg">' + opts + '</select>' +
-      '<label>' + esc(L('What is the problem?', 'समस्या क्या है?')) + '</label><select id="gwi">' + iss + '</select>' +
-      '<label>' + esc(L('Describe it (optional)', 'विवरण (वैकल्पिक)')) + '</label><textarea id="gwd"></textarea>' +
-      '<div class="gwrow"><button class="gwbtn pri" id="gwsend" type="button">' + esc(L('Send on WhatsApp', 'WhatsApp पर भेजें')) + '</button>' +
-      '<button class="gwbtn" id="gwshow" type="button">' + esc(L('Show QR for this ghat', 'इस घाट का QR दिखाएँ')) + '</button>' +
-      '<button class="gwbtn" id="gwx" type="button">' + esc(L('Close', 'बंद करें')) + '</button></div><div id="gwqrbox"></div>');
-    o.querySelector('#gwx').addEventListener('click', closeOv);
-    o.querySelector('#gwsend').addEventListener('click', function () {
-      var v = o.querySelector('#gwg').value, gg = v === 'x' ? null : D.ghats[+v];
-      var k = o.querySelector('#gwi').value, it = ISSUES.filter(function (x) { return x[0] === k; })[0] || ISSUES[5];
-      var txt = 'GhatWise report\nGhat: ' + (gg ? gg.name_en : 'Other or new ghat') + '\nProblem: ' + it[1] + '\n' + (o.querySelector('#gwd').value || '') + '\n' + new Date().toLocaleString('en-IN') + '\n' + base();
-      window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank', 'noopener');
-    });
-    o.querySelector('#gwshow').addEventListener('click', function () {
-      var v = o.querySelector('#gwg').value; if (v === 'x') return;
-      var box = o.querySelector('#gwqrbox'); box.className = 'gwqr'; box.textContent = '…'; drawQR(+v, box);
-    });
-  }
+  function openReport(i, qr) { if (window.gwReport) window.gwReport(i, qr); }
 
-  function indexFromScan(txt) {
-    var m = /[?&]ghat=(\d+)/.exec(String(txt)); if (!m) return -1;
-    var i = +m[1]; return D.ghats[i] ? i : -1;
-  }
+  function indexFromScan(txt) { return window.gwGhatIndex ? window.gwGhatIndex(txt) : -1; }
   function openScan() {
     var o = overlay('<h2>' + esc(L('Scan a ghat QR', 'घाट का QR स्कैन करें')) + '</h2><p class="note" id="gwmsg"></p><video class="gwvid" id="gwvid" playsinline muted hidden></video>' +
       '<div class="gwrow"><button class="gwbtn" id="gwx" type="button">' + esc(L('Close', 'बंद करें')) + '</button></div>');
@@ -157,9 +130,21 @@
     });
   }
 
+  function gotoGhat(i) { var g = D.ghats[i]; if (!g) return; openCards.add(g.id); tab = 'rank'; pendingScroll = 'card-' + i; render(); }
+  function decorate() {
+    document.querySelectorAll('article.card[id^="card-"]').forEach(function (a) {
+      if (a.querySelector('.gwcardact')) return;
+      var i = a.id.slice(5), d = document.createElement('div'); d.className = 'gwrow gwcardact';
+      d.innerHTML = '<button class="gwbtn pri" type="button" data-gwrep="' + i + '">' + esc(L('Report a problem at this ghat', 'इस घाट की शिकायत करें')) + '</button><button class="gwbtn" type="button" data-gwqr="' + i + '">' + esc(L('QR for this ghat', 'इस घाट का QR')) + '</button>';
+      a.appendChild(d);
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('button'); if (!b) return;
+    if (b.dataset.gwrep !== undefined) openReport(+b.dataset.gwrep);
+    else if (b.dataset.gwqr !== undefined) openReport(+b.dataset.gwqr, true);
+  });
   var _render = render;
-  render = function () { _render(); inject(); };
-  inject();
-  var q = /[?&]ghat=(\d+)/.exec(location.search);
-  if (q && D.ghats[+q[1]]) openReport(+q[1]);
+  render = function () { _render(); inject(); decorate(); };
+  inject(); decorate();
 })();
