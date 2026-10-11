@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visarjan Ghat Watch | Bhopal</title>
+<meta name="description" content="Ranks Bhopal's idol-immersion ghats by water-test risk before Durga visarjan, with the report page behind every number.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg:#f6f4ee; --card:#ffffff; --ink:#1c2331; --muted:#5b6475; --line:#e2ded3; --band:#f3f1ea;
+  --accent:#0a6c70; --accent-ink:#ffffff; --bad:#c0392b; --ok:#2b7a57; --warn:#c27c0e;
+  --p1:#c0392b; --p2:#c27c0e; --p3:#2b7a57; --soft-bad:#fbeceb; --soft-warn:#fcf3e1; --soft-ok:#e8f4ee;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#12161d; --card:#1b212b; --ink:#e8ebf1; --muted:#a2abbb; --line:#2d3543; --band:#202735;
+    --accent:#4fc1c6; --accent-ink:#0c1a1b; --bad:#ef7b6f; --ok:#5fc08f; --warn:#e5ad4a;
+    --p1:#ef7b6f; --p2:#e5ad4a; --p3:#5fc08f; --soft-bad:#33201f; --soft-warn:#33291a; --soft-ok:#1b2d25;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#12161d; --card:#1b212b; --ink:#e8ebf1; --muted:#a2abbb; --line:#2d3543; --band:#202735;
+  --accent:#4fc1c6; --accent-ink:#0c1a1b; --bad:#ef7b6f; --ok:#5fc08f; --warn:#e5ad4a;
+  --p1:#ef7b6f; --p2:#e5ad4a; --p3:#5fc08f; --soft-bad:#33201f; --soft-warn:#33291a; --soft-ok:#1b2d25;
+}
+html { scroll-padding-top:env(safe-area-inset-top,0px); height:100%; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100%; background:var(--bg); color:var(--ink);
+  font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans","Noto Sans Devanagari","Mangal",Roboto,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:16px; }
+header { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:8px; }
+h1 { font-size:1.6rem; line-height:1.2; margin:0 0 4px; }
+.sub { color:var(--muted); margin:0; max-width:620px; }
+.lang { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--card); }
+.lang button { border:0; background:transparent; color:var(--ink); padding:6px 14px; font:inherit; cursor:pointer; }
+.lang button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); }
+.countdown { display:inline-block; margin-top:8px; padding:4px 12px; border-radius:999px; background:var(--soft-warn); color:var(--ink); font-size:.9rem; border:1px solid var(--line); }
+nav.tabs { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; border-bottom:1px solid var(--line); }
+nav.tabs button { border:0; background:transparent; color:var(--muted); padding:10px 14px; font:inherit; cursor:pointer; border-bottom:3px solid transparent; }
+nav.tabs button[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--accent); font-weight:600; }
+.banner { background:var(--soft-warn); border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin-bottom:14px; font-size:.95rem; }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:14px; }
+.stat { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+.stat b { display:block; font-size:1.8rem; line-height:1.1; color:var(--bad); }
+.stat span { color:var(--muted); font-size:.9rem; }
+.basis { margin:10px 0 4px; }
+.basis .label { font-size:.85rem; color:var(--muted); margin-bottom:4px; display:block; }
+.seg { display:flex; flex-wrap:wrap; gap:6px; }
+.seg button { border:1px solid var(--line); background:var(--card); color:var(--ink); padding:7px 12px; border-radius:999px; font:inherit; font-size:.9rem; cursor:pointer; }
+.seg button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.basis-desc { font-size:.85rem; color:var(--muted); margin:6px 0 12px; }
+.legend { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 14px; font-size:.85rem; }
+.chip { display:inline-block; padding:2px 10px; border-radius:999px; border:1px solid var(--line); background:var(--card); }
+.chip.p1 { border-color:var(--p1); color:var(--p1); } .chip.p2 { border-color:var(--p2); color:var(--p2); } .chip.p3 { border-color:var(--p3); color:var(--p3); }
+.card { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+.card.p1 { border-left-color:var(--p1); } .card.p2 { border-left-color:var(--p2); } .card.p3 { border-left-color:var(--p3); }
+.card-top { display:flex; gap:12px; align-items:flex-start; }
+.rank { font-size:1.9rem; font-weight:700; line-height:1; min-width:2.2rem; color:var(--muted); }
+.card-main { flex:1; min-width:0; }
+.card h2 { font-size:1.15rem; margin:0; line-height:1.3; }
+.body-name { color:var(--muted); font-size:.9rem; }
+.badges { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+.badge { font-size:.8rem; padding:2px 10px; border-radius:999px; border:1px solid var(--line); background:var(--band); }
+.badge.p1 { background:var(--soft-bad); border-color:var(--p1); color:var(--p1); font-weight:600; }
+.badge.p2 { background:var(--soft-warn); border-color:var(--p2); color:var(--ink); font-weight:600; }
+.badge.p3 { background:var(--soft-ok); border-color:var(--p3); color:var(--ink); font-weight:600; }
+.badge.low { background:var(--soft-warn); border-color:var(--warn); }
+.scorerow { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:.9rem; }
+.bar { flex:1; height:10px; background:var(--band); border-radius:6px; overflow:hidden; border:1px solid var(--line); }
+.bar span { display:block; height:100%; background:var(--p3); }
+.card.p1 .bar span { background:var(--p1); } .card.p2 .bar span { background:var(--p2); }
+.scorenum { font-weight:700; min-width:3.2rem; text-align:right; }
+.sec { margin:10px 0 2px; font-weight:600; font-size:.9rem; color:var(--muted); text-transform:none; }
+ul { margin:4px 0 8px; padding-left:20px; } li { margin:3px 0; }
+details { margin-top:10px; border-top:1px dashed var(--line); padding-top:8px; }
+summary { cursor:pointer; color:var(--accent); font-weight:600; }
+.chart-title { font-size:.9rem; font-weight:600; margin:12px 0 2px; }
+svg.chart { width:100%; height:auto; display:block; background:var(--card); }
+svg.chart text { fill:var(--muted); font-size:10px; font-family:inherit; }
+svg.chart .lim { stroke:var(--bad); stroke-width:1; stroke-dasharray:4 3; opacity:.8; }
+svg.chart .grid { stroke:var(--line); stroke-width:1; }
+svg.chart .ptok { fill:var(--ok); } svg.chart .ptbad { fill:var(--bad); }
+svg.chart .join { stroke:var(--muted); stroke-width:1; opacity:.45; fill:none; }
+svg.chart text.miss { fill:var(--muted); font-size:14px; text-anchor:middle; }
+svg.chart text.evl { fill:var(--ink); font-size:11px; text-anchor:middle; }
+svg.chart text.none { font-size:9px; text-anchor:middle; }
+svg.chart text.tick { text-anchor:end; } svg.chart text.limtick { fill:var(--bad); font-weight:700; }
+.keyrow { display:flex; flex-wrap:wrap; gap:12px; font-size:.8rem; color:var(--muted); margin:6px 0; align-items:center; }
+.dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+.dot.ok { background:var(--ok); } .dot.bad { background:var(--bad); }
+.tablewrap { overflow-x:auto; max-width:100%; }
+table { border-collapse:collapse; width:100%; font-size:.85rem; }
+th, td { border-bottom:1px solid var(--line); padding:5px 8px; text-align:left; white-space:nowrap; }
+th { color:var(--muted); font-weight:600; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.bad { color:var(--bad); font-weight:700; } td.missing { color:var(--muted); }
+tr.noevent td { color:var(--muted); font-style:italic; }
+a { color:var(--accent); }
+.note { font-size:.85rem; color:var(--muted); }
+pre.brief { white-space:pre-wrap; word-wrap:break-word; font:inherit; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; line-height:1.55; }
+.actions { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+button.primary { background:var(--accent); color:var(--accent-ink); border:0; padding:9px 16px; border-radius:8px; font:inherit; cursor:pointer; }
+button.ghost { background:var(--card); color:var(--ink); border:1px solid var(--line); padding:9px 16px; border-radius:8px; font:inherit; cursor:pointer; }
+.method h2 { font-size:1.1rem; margin:20px 0 4px; }
+.method p { margin:4px 0; }
+footer { margin:24px 0 8px; color:var(--muted); font-size:.82rem; }
+@media (max-width:520px) { .wrap { padding:12px; } h1 { font-size:1.35rem; } .rank { font-size:1.5rem; min-width:1.8rem; } }
+@media print {
+  header .lang, nav.tabs, .actions, .banner, footer { display:none !important; }
+  body { background:#fff; color:#000; } pre.brief { border:0; padding:0; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#9aa3b2" stroke-width="2" opacity=".55"/>
+    </pattern>
+  </defs>
+</svg>
+<div class="wrap" id="app"></div>
+
+<script>
+const D = {"meta":{"built":"2026-10-11","durga_date":"2026-10-20","reports":{"2023":{"name":"MPPCB Idol Immersion Report 2023 (CPCB format)","url":"https://www.mppcb.mp.gov.in/proc/mon/Idol_immer._Report_23_CPCB.pdf"},"2024":{"name":"MPPCB Ganesh and Durga Visarjan Report 2024","url":"https://www.mppcb.mp.gov.in/proc/mon/Ganesh_and_Durga_visarjan_report-2024.pdf"},"2025":{"name":"MPPCB Ganesh and Durga Visarjan Report 2025","url":"https://www.mppcb.mp.gov.in/proc/mon/Ganesh_and_Durga_visarjan_report-2025.pdf"}},"expected_per_ghat":54,"p1":40.0,"p2":25.0},"headline":{"readings":1524,"ghats":7,"do_tested":116,"do_below":42,"bod_tested":112,"bod_above":100,"ph_tested":115,"ph_out":6,"bairagarh_do_zero":4},"bases":[{"id":"recency","en":"All festivals, recent years count more","hi":"सभी त्योहार, हाल के वर्षों को अधिक महत्व","desc_en":"Ganesh and Durga, 2023 to 2025. 2025 readings count 3x, 2024 count 2x, 2023 count 1x.","desc_hi":"गणेश और दुर्गा, 2023 से 2025। 2025 के आँकड़े 3 गुना, 2024 के 2 गुना, 2023 के 1 गुना गिने गए।"},{"id":"durga","en":"Durga visarjan only","hi":"केवल दुर्गा विसर्जन","desc_en":"Only the Durga tests (the festival coming on 20 October), recent years weighted more.","desc_hi":"केवल दुर्गा की जाँच (20 अक्टूबर को आने वाला त्योहार), हाल के वर्षों को अधिक महत्व।"},{"id":"latest","en":"Latest year (2025) only","hi":"केवल सबसे नया वर्ष (2025)","desc_en":"Only 2025 readings. Two ghats have very few 2025 readings, so read their rank with care.","desc_hi":"केवल 2025 के आँकड़े। दो घाटों के 2025 में बहुत कम आँकड़े हैं, इसलिए उनके क्रम को सावधानी से पढ़ें।"}],"default_basis":"recency","ghats":[{"id":"Khatlapura ghat","name_en":"Khatlapura ghat","name_hi":"खटलापुरा घाट","body_en":"Lower Lake","body_hi":"निचला तालाब (छोटा तालाब)","scores":{"recency":{"score":21.6,"tested":53,"failed":24,"rank":6,"priority":3},"durga":{"score":21.7,"tested":26,"failed":13,"rank":5,"priority":3},"latest":{"score":13.9,"tested":18,"failed":6,"rank":6,"priority":3}},"rank_range":[5,6],"confidence":"High","coverage":0.981,"scored_tested":53,"m":{"do_tested":18,"do_below":8,"do_zero":0,"bod_tested":17,"bod_above":15,"ph_tested":18,"ph_out":1,"worst_do":{"value":4.0,"festival":"Ganesh","year":2024,"phase":"during","page":69},"worst_bod":{"value":11.2,"festival":"Ganesh","year":2023,"phase":"after","page":26},"scored_tested":53,"coverage":0.981,"metals_total":72,"metals_detected":41,"metals_bdl":27,"metals_not_sampled":4,"medium_site_match":false},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 8 of 18 tests.","BOD was above the limit of 3 mg/l in 15 of 17 tests (highest 11.2 mg/l, Ganesh 2023, one week after).","pH was outside 6.5 to 8.5 in 1 of 18 tests."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 18 में से 8 जाँच में।","BOD मानक 3 mg/l से अधिक: 17 में से 15 जाँच में (सर्वाधिक 11.2 mg/l, गणेश 2023, विसर्जन के एक सप्ताह बाद)।","pH सीमा 6.5 से 8.5 से बाहर: 18 में से 1 जाँच में।"]},"actions":{"en":["Prioritise aeration or other oxygen support before immersion.","Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).","Test before 20 October to fill the data gaps."],"hi":["विसर्जन से पहले एयरेशन या ऑक्सीजन बढ़ाने के उपाय को प्राथमिकता दें।","जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।","डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।"]},"gaps":{"en":["Durga 2023, during immersion: BOD not sampled."],"hi":["दुर्गा 2023, विसर्जन के दौरान: BOD की जाँच नहीं हुई।"]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 41 of 72 results, below detection limit (BDL) in 27, not sampled in 4.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 72 में से 41 परिणामों में पाई गईं, 27 में पहचान-सीमा से नीचे (BDL), 4 में जाँच नहीं हुई।"},"missing_events":[],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":6.98,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":7.63,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":8.08,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":6.4,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.1,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":7.8,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":2.4,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":2.8,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":11.2,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":7.87,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":8.2,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":7.46,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":4.5,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":4.2,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":4.4,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":6.4,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":null,"flag":"not sampled","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":7.8,"flag":"","pg":59,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":8.0,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":7.57,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":7.4,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":6.6,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":4.5,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":4.4,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":7.8,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":8.0,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":8.4,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":8.07,"flag":"","pg":69,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":6.49,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":7.95,"flag":"","pg":69,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":4.3,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":4.0,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":4.6,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":6.8,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":7.2,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":6.2,"flag":"","pg":69,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":7.34,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":8.0,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":7.76,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":7.3,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.0,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.5,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":4.4,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":5.4,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":5.2,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Durga","ph":"pre","p":"pH","v":8.17,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"pH","v":7.72,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"pH","v":7.81,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":7.1,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":6.2,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":6.6,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"BOD","v":4.4,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"BOD","v":4.6,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"BOD","v":3.1,"flag":"","pg":64,"bad":true}]},{"id":"Bairagarh (Sant Hirdaram) kund","name_en":"Bairagarh (Sant Hirdaram) kund","name_hi":"बैरागढ़ (संत हिरदाराम) कुंड","body_en":"Upper Lake","body_hi":"ऊपरी तालाब (बड़ा तालाब)","scores":{"recency":{"score":42.3,"tested":39,"failed":24,"rank":1,"priority":1},"durga":{"score":45.0,"tested":18,"failed":12,"rank":1,"priority":1},"latest":{"score":56.3,"tested":3,"failed":2,"rank":1,"priority":1}},"rank_range":[1,1],"confidence":"Medium","coverage":0.722,"scored_tested":39,"m":{"do_tested":13,"do_below":11,"do_zero":4,"bod_tested":13,"bod_above":13,"ph_tested":13,"ph_out":0,"worst_do":{"value":0.0,"festival":"Ganesh","year":2023,"phase":"after","page":26},"worst_bod":{"value":14.0,"festival":"Ganesh","year":2024,"phase":"after","page":69},"scored_tested":39,"coverage":0.722,"metals_total":60,"metals_detected":29,"metals_bdl":23,"metals_not_sampled":8,"medium_site_match":false},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 11 of 13 tests, and read 0 mg/l 4 times.","BOD was above the limit of 3 mg/l in 13 of 13 tests (highest 14 mg/l, Ganesh 2024, one week after)."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 13 में से 11 जाँच में; 4 बार 0 mg/l दर्ज हुआ।","BOD मानक 3 mg/l से अधिक: 13 में से 13 जाँच में (सर्वाधिक 14 mg/l, गणेश 2024, विसर्जन के एक सप्ताह बाद)।"]},"actions":{"en":["Prioritise aeration or other oxygen support before immersion.","Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).","Test before 20 October to fill the data gaps."],"hi":["विसर्जन से पहले एयरेशन या ऑक्सीजन बढ़ाने के उपाय को प्राथमिकता दें।","जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।","डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।"]},"gaps":{"en":["No Durga 2025 table in the MPPCB report, so there is no data for it.","Ganesh 2025, before immersion and one week after: DO, BOD, pH not sampled."],"hi":["MPPCB रिपोर्ट में दुर्गा 2025 की तालिका नहीं है, इसलिए इसका कोई डेटा नहीं है।","गणेश 2025, विसर्जन से पहले और विसर्जन के एक सप्ताह बाद: DO, BOD, pH की जाँच नहीं हुई।"]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 29 of 60 results, below detection limit (BDL) in 23, not sampled in 8.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 60 में से 29 परिणामों में पाई गईं, 23 में पहचान-सीमा से नीचे (BDL), 8 में जाँच नहीं हुई।"},"missing_events":[["Durga",2025]],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":7.71,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":7.37,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":7.2,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":5.6,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":4.5,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":0.0,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":3.8,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":4.2,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":10.0,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":7.32,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":7.55,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":7.81,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":0.0,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":0.0,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":4.2,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":9.2,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":9.0,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":9.4,"flag":"","pg":60,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":7.03,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":6.87,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":7.24,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":4.2,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":2.2,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":2.4,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":6.0,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":8.0,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":8.2,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":7.27,"flag":"","pg":69,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":7.36,"flag":"","pg":69,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":7.22,"flag":"","pg":69,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":5.2,"flag":"","pg":69,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":4.1,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":4.2,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":4.2,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":13.2,"flag":"","pg":69,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":14.0,"flag":"","pg":69,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":null,"flag":"*","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":7.36,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":null,"flag":"**","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":null,"flag":"not sampled","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":0.0,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":null,"flag":"not sampled","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":null,"flag":"not sampled","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":8.0,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":null,"flag":"not sampled","pg":28,"bad":false}]},{"id":"Prempura ghat","name_en":"Prempura ghat","name_hi":"प्रेमपुरा घाट","body_en":"Upper Lake","body_hi":"ऊपरी तालाब (बड़ा तालाब)","scores":{"recency":{"score":12.7,"tested":50,"failed":14,"rank":7,"priority":3},"durga":{"score":10.2,"tested":23,"failed":5,"rank":7,"priority":3},"latest":{"score":13.1,"tested":18,"failed":6,"rank":7,"priority":3}},"rank_range":[7,7],"confidence":"High","coverage":0.926,"scored_tested":50,"m":{"do_tested":18,"do_below":3,"do_zero":0,"bod_tested":15,"bod_above":9,"ph_tested":17,"ph_out":2,"worst_do":{"value":3.9,"festival":"Ganesh","year":2024,"phase":"during","page":70},"worst_bod":{"value":6.8,"festival":"Ganesh","year":2024,"phase":"during","page":70},"scored_tested":50,"coverage":0.926,"metals_total":72,"metals_detected":48,"metals_bdl":24,"metals_not_sampled":0,"medium_site_match":false},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 3 of 18 tests.","BOD was above the limit of 3 mg/l in 9 of 15 tests (highest 6.8 mg/l, Ganesh 2024, during immersion).","pH was outside 6.5 to 8.5 in 2 of 17 tests."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 18 में से 3 जाँच में।","BOD मानक 3 mg/l से अधिक: 15 में से 9 जाँच में (सर्वाधिक 6.8 mg/l, गणेश 2024, विसर्जन के दौरान)।","pH सीमा 6.5 से 8.5 से बाहर: 17 में से 2 जाँच में।"]},"actions":{"en":["Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).","Test before 20 October to fill the data gaps."],"hi":["जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।","डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।"]},"gaps":{"en":["Durga 2023, before immersion and one week after: BOD not sampled.","Durga 2023, during immersion: BOD, pH not sampled."],"hi":["दुर्गा 2023, विसर्जन से पहले और विसर्जन के एक सप्ताह बाद: BOD की जाँच नहीं हुई।","दुर्गा 2023, विसर्जन के दौरान: BOD, pH की जाँच नहीं हुई।"]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 48 of 72 results, below detection limit (BDL) in 24, not sampled in 0.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 72 में से 48 परिणामों में पाई गईं, 24 में पहचान-सीमा से नीचे (BDL), 0 में जाँच नहीं हुई।"},"missing_events":[],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":7.72,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":8.53,"flag":"","pg":26,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":7.44,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":6.2,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.7,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.5,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":1.3,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":1.5,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":2.0,"flag":"","pg":26,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":7.66,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":null,"flag":"not sampled","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":7.39,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":5.4,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":5.0,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":5.7,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":null,"flag":"not sampled","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":null,"flag":"not sampled","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":null,"flag":"not sampled","pg":60,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":8.22,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":8.02,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":8.11,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":7.6,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":6.4,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":7.6,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":2.4,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":2.6,"flag":"","pg":25,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":3.4,"flag":"","pg":25,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":8.02,"flag":"","pg":70,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":8.55,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":8.05,"flag":"","pg":70,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":4.3,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":3.9,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.3,"flag":"","pg":70,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":3.2,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":6.8,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":5.2,"flag":"","pg":70,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":7.41,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":8.01,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":7.92,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":6.5,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":5.6,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.0,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":4.8,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":4.8,"flag":"","pg":28,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":3.0,"flag":"","pg":28,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"pH","v":8.25,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"pH","v":8.24,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"pH","v":8.29,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":6.6,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":4.9,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":8.2,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"BOD","v":4.4,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"BOD","v":4.8,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"BOD","v":3.2,"flag":"","pg":65,"bad":true}]},{"id":"Rani Kamlapati ghat / Kamla Park kund","name_en":"Rani Kamlapati ghat / Kamla Park kund","name_hi":"रानी कमलापति घाट / कमला पार्क कुंड","body_en":"Lower Lake (as printed in Durga tables)","body_hi":"Lower Lake (as printed in Durga tables)","scores":{"recency":{"score":25.6,"tested":54,"failed":24,"rank":4,"priority":2},"durga":{"score":30.6,"tested":27,"failed":12,"rank":3,"priority":2},"latest":{"score":28.6,"tested":18,"failed":9,"rank":3,"priority":2}},"rank_range":[3,4],"confidence":"Medium","coverage":1.0,"scored_tested":54,"m":{"do_tested":18,"do_below":6,"do_zero":0,"bod_tested":18,"bod_above":18,"ph_tested":18,"ph_out":0,"worst_do":{"value":2.4,"festival":"Durga","year":2025,"phase":"during","page":64},"worst_bod":{"value":9.2,"festival":"Ganesh","year":2023,"phase":"after","page":27},"scored_tested":54,"coverage":1.0,"metals_total":72,"metals_detected":47,"metals_bdl":25,"metals_not_sampled":0,"medium_site_match":true},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 6 of 18 tests.","BOD was above the limit of 3 mg/l in 18 of 18 tests (highest 9.2 mg/l, Ganesh 2023, one week after)."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 18 में से 6 जाँच में।","BOD मानक 3 mg/l से अधिक: 18 में से 18 जाँच में (सर्वाधिक 9.2 mg/l, गणेश 2023, विसर्जन के एक सप्ताह बाद)।"]},"actions":{"en":["Prioritise aeration or other oxygen support before immersion.","Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).","Confirm with MPPCB whether Kamla Park kund and Lower Lake ghat are the same place."],"hi":["विसर्जन से पहले एयरेशन या ऑक्सीजन बढ़ाने के उपाय को प्राथमिकता दें।","जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।","MPPCB से पुष्टि करें कि कमला पार्क कुंड और लोअर लेक घाट एक ही स्थान हैं या नहीं।"]},"gaps":{"en":["The site name may cover two places (\"Kamla Park kund\" in Ganesh tables, \"Lower Lake ghat\" in Durga tables)."],"hi":["साइट का नाम दो स्थानों का हो सकता है (गणेश तालिकाओं में \"कमला पार्क कुंड\", दुर्गा तालिकाओं में \"लोअर लेक घाट\")।"]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 47 of 72 results, below detection limit (BDL) in 25, not sampled in 0.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 72 में से 47 परिणामों में पाई गईं, 25 में पहचान-सीमा से नीचे (BDL), 0 में जाँच नहीं हुई।"},"missing_events":[],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":7.65,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":8.35,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":8.07,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":6.6,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":5.8,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":9.5,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":4.2,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":4.4,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":9.2,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":8.07,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":7.63,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":7.54,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":6.2,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":6.0,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":6.5,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":8.8,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":8.4,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":8.6,"flag":"","pg":59,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":7.48,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":7.7,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":7.75,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":7.5,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":6.4,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":6.5,"flag":"","pg":24,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":5.6,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":5.8,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":6.0,"flag":"","pg":24,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":7.35,"flag":"","pg":70,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":7.31,"flag":"","pg":70,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":7.63,"flag":"","pg":70,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":4.8,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":4.3,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":3.6,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":4.8,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":5.0,"flag":"","pg":70,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":6.4,"flag":"","pg":70,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":7.46,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":7.7,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":7.62,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":6.9,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.9,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.2,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":3.8,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":6.9,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":4.8,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Durga","ph":"pre","p":"pH","v":7.92,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"pH","v":7.85,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"pH","v":7.38,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":2.5,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":2.4,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":2.6,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"pre","p":"BOD","v":6.8,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"BOD","v":8.8,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"BOD","v":4.8,"flag":"","pg":64,"bad":true}]},{"id":"Hathaikheda dam / kund","name_en":"Hathaikheda dam / kund","name_hi":"हथाईखेड़ा डैम / कुंड","body_en":"Hathaikheda dam","body_hi":"हथाईखेड़ा डैम","scores":{"recency":{"score":22.8,"tested":54,"failed":19,"rank":5,"priority":3},"durga":{"score":20.1,"tested":27,"failed":9,"rank":6,"priority":3},"latest":{"score":22.4,"tested":18,"failed":7,"rank":5,"priority":3}},"rank_range":[5,6],"confidence":"High","coverage":1.0,"scored_tested":54,"m":{"do_tested":18,"do_below":0,"do_zero":0,"bod_tested":18,"bod_above":16,"ph_tested":18,"ph_out":3,"worst_do":{"value":5.1,"festival":"Ganesh","year":2023,"phase":"after","page":27},"worst_bod":{"value":22.0,"festival":"Ganesh","year":2024,"phase":"after","page":71},"scored_tested":54,"coverage":1.0,"metals_total":72,"metals_detected":47,"metals_bdl":25,"metals_not_sampled":0,"medium_site_match":false},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 0 of 18 tests.","BOD was above the limit of 3 mg/l in 16 of 18 tests (highest 22 mg/l, Ganesh 2024, one week after).","pH was outside 6.5 to 8.5 in 3 of 18 tests."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 18 में से 0 जाँच में।","BOD मानक 3 mg/l से अधिक: 18 में से 16 जाँच में (सर्वाधिक 22 mg/l, गणेश 2024, विसर्जन के एक सप्ताह बाद)।","pH सीमा 6.5 से 8.5 से बाहर: 18 में से 3 जाँच में।"]},"actions":{"en":["Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit)."],"hi":["जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।"]},"gaps":{"en":[],"hi":[]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 47 of 72 results, below detection limit (BDL) in 25, not sampled in 0.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 72 में से 47 परिणामों में पाई गईं, 25 में पहचान-सीमा से नीचे (BDL), 0 में जाँच नहीं हुई।"},"missing_events":[],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":8.1,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":8.92,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":8.01,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":7.9,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.5,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":5.1,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":2.5,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":6.0,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":10.8,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":8.02,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":8.02,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":8.15,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":6.5,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":10.2,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":8.6,"flag":"","pg":59,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":4.0,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":8.8,"flag":"","pg":59,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":2.4,"flag":"","pg":59,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":9.2,"flag":"","pg":23,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":7.7,"flag":"","pg":23,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":7.7,"flag":"","pg":23,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":8.6,"flag":"","pg":23,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":5.9,"flag":"","pg":23,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":5.7,"flag":"","pg":23,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":7.4,"flag":"","pg":23,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":4.4,"flag":"","pg":23,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":4.6,"flag":"","pg":23,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":7.93,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":7.29,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":7.38,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":9.0,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":5.3,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":11.0,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":7.2,"flag":"","pg":71,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":13.2,"flag":"","pg":71,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":22.0,"flag":"","pg":71,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":8.23,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":8.71,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":8.44,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":5.6,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":7.0,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.4,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":5.2,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":10.0,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":5.2,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Durga","ph":"pre","p":"pH","v":8.14,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"pH","v":8.37,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"pH","v":8.44,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":8.5,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":8.5,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":10.8,"flag":"","pg":64,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"BOD","v":6.8,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"BOD","v":8.0,"flag":"","pg":64,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"BOD","v":6.4,"flag":"","pg":64,"bad":true}]},{"id":"Malikhedi kund","name_en":"Malikhedi kund","name_hi":"मालीखेड़ी कुंड","body_en":"Kund","body_hi":"कुंड","scores":{"recency":{"score":30.6,"tested":39,"failed":20,"rank":2,"priority":2},"durga":{"score":29.8,"tested":18,"failed":11,"rank":4,"priority":2},"latest":{"score":47.8,"tested":3,"failed":2,"rank":2,"priority":1}},"rank_range":[2,4],"confidence":"Medium","coverage":0.722,"scored_tested":39,"m":{"do_tested":13,"do_below":9,"do_zero":0,"bod_tested":13,"bod_above":11,"ph_tested":13,"ph_out":0,"worst_do":{"value":0.6,"festival":"Ganesh","year":2025,"phase":"during","page":29},"worst_bod":{"value":16.8,"festival":"Ganesh","year":2023,"phase":"after","page":27},"scored_tested":39,"coverage":0.722,"metals_total":60,"metals_detected":28,"metals_bdl":24,"metals_not_sampled":8,"medium_site_match":false},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 9 of 13 tests.","BOD was above the limit of 3 mg/l in 11 of 13 tests (highest 16.8 mg/l, Ganesh 2023, one week after)."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 13 में से 9 जाँच में।","BOD मानक 3 mg/l से अधिक: 13 में से 11 जाँच में (सर्वाधिक 16.8 mg/l, गणेश 2023, विसर्जन के एक सप्ताह बाद)।"]},"actions":{"en":["Prioritise aeration or other oxygen support before immersion.","Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).","Test before 20 October to fill the data gaps."],"hi":["विसर्जन से पहले एयरेशन या ऑक्सीजन बढ़ाने के उपाय को प्राथमिकता दें।","जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।","डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।"]},"gaps":{"en":["No Durga 2025 table in the MPPCB report, so there is no data for it.","Ganesh 2025, before immersion and one week after: DO, BOD, pH not sampled."],"hi":["MPPCB रिपोर्ट में दुर्गा 2025 की तालिका नहीं है, इसलिए इसका कोई डेटा नहीं है।","गणेश 2025, विसर्जन से पहले और विसर्जन के एक सप्ताह बाद: DO, BOD, pH की जाँच नहीं हुई।"]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 28 of 60 results, below detection limit (BDL) in 24, not sampled in 8.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 60 में से 28 परिणामों में पाई गईं, 24 में पहचान-सीमा से नीचे (BDL), 8 में जाँच नहीं हुई।"},"missing_events":[["Durga",2025]],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":7.65,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":7.81,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":7.11,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":7.5,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":7.0,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":3.2,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":1.6,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":1.8,"flag":"","pg":27,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":16.8,"flag":"","pg":27,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":7.57,"flag":"","pg":61,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":7.37,"flag":"","pg":61,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":7.81,"flag":"","pg":61,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":4.6,"flag":"","pg":61,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":4.3,"flag":"","pg":61,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":10.4,"flag":"","pg":61,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":6.8,"flag":"","pg":61,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":6.8,"flag":"","pg":61,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":6.6,"flag":"","pg":61,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":7.29,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":7.3,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":7.01,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":4.5,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":4.1,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":4.0,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":6.8,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":5.0,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":5.2,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":7.48,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":7.38,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":7.38,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":4.8,"flag":"","pg":71,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":3.8,"flag":"","pg":71,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.5,"flag":"","pg":71,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":6.6,"flag":"","pg":71,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":6.8,"flag":"","pg":71,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":8.4,"flag":"","pg":71,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":null,"flag":"*","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":7.53,"flag":"","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":null,"flag":"**","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":null,"flag":"not sampled","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":0.6,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":null,"flag":"not sampled","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":null,"flag":"not sampled","pg":29,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":5.8,"flag":"","pg":29,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":null,"flag":"not sampled","pg":29,"bad":false}]},{"id":"Shahpura lake ghat","name_en":"Shahpura lake ghat","name_hi":"शाहपुरा लेक घाट","body_en":"Shahpura Lake","body_hi":"शाहपुरा तालाब","scores":{"recency":{"score":28.0,"tested":54,"failed":23,"rank":3,"priority":2},"durga":{"score":37.5,"tested":27,"failed":14,"rank":2,"priority":2},"latest":{"score":27.6,"tested":18,"failed":8,"rank":4,"priority":2}},"rank_range":[2,4],"confidence":"High","coverage":1.0,"scored_tested":54,"m":{"do_tested":18,"do_below":5,"do_zero":0,"bod_tested":18,"bod_above":18,"ph_tested":18,"ph_out":0,"worst_do":{"value":2.5,"festival":"Durga","year":2025,"phase":"pre","page":65},"worst_bod":{"value":11.6,"festival":"Durga","year":2024,"phase":"after","page":26},"scored_tested":54,"coverage":1.0,"metals_total":72,"metals_detected":46,"metals_bdl":26,"metals_not_sampled":0,"medium_site_match":false},"reasons":{"en":["Dissolved oxygen (DO) was below the bathing limit of 5 mg/l in 5 of 18 tests.","BOD was above the limit of 3 mg/l in 18 of 18 tests (highest 11.6 mg/l, Durga 2024, one week after)."],"hi":["घुली ऑक्सीजन (DO) स्नान-मानक 5 mg/l से कम: 18 में से 5 जाँच में।","BOD मानक 3 mg/l से अधिक: 18 में से 18 जाँच में (सर्वाधिक 11.6 mg/l, दुर्गा 2024, विसर्जन के एक सप्ताह बाद)।"]},"actions":{"en":["Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit)."],"hi":["जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।"]},"gaps":{"en":[],"hi":[]},"metals":{"en":"Metals (chromium, lead, zinc, copper) are shown for context only. Class B sets no limit for them, so they are not scored. Detected in 46 of 72 results, below detection limit (BDL) in 26, not sampled in 0.","hi":"धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए हैं। श्रेणी-B में इनकी कोई सीमा नहीं है, इसलिए इन्हें अंक नहीं दिए गए। 72 में से 46 परिणामों में पाई गईं, 26 में पहचान-सीमा से नीचे (BDL), 0 में जाँच नहीं हुई।"},"missing_events":[],"readings":[{"y":2023,"f":"Ganesh","ph":"pre","p":"pH","v":7.32,"flag":"","pg":28,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"pH","v":7.36,"flag":"","pg":28,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"pH","v":7.76,"flag":"","pg":28,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":5.9,"flag":"","pg":28,"bad":false},{"y":2023,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":5.2,"flag":"","pg":28,"bad":false},{"y":2023,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":5.0,"flag":"","pg":28,"bad":false},{"y":2023,"f":"Ganesh","ph":"pre","p":"BOD","v":6.4,"flag":"","pg":28,"bad":true},{"y":2023,"f":"Ganesh","ph":"during","p":"BOD","v":8.4,"flag":"","pg":28,"bad":true},{"y":2023,"f":"Ganesh","ph":"after","p":"BOD","v":10.4,"flag":"","pg":28,"bad":true},{"y":2023,"f":"Durga","ph":"pre","p":"pH","v":7.35,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"during","p":"pH","v":7.73,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"after","p":"pH","v":7.76,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":4.5,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":4.0,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":5.0,"flag":"","pg":60,"bad":false},{"y":2023,"f":"Durga","ph":"pre","p":"BOD","v":6.4,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"during","p":"BOD","v":6.8,"flag":"","pg":60,"bad":true},{"y":2023,"f":"Durga","ph":"after","p":"BOD","v":7.8,"flag":"","pg":60,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"pH","v":7.36,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"pH","v":7.35,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"pH","v":7.53,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":6.8,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":5.4,"flag":"","pg":26,"bad":false},{"y":2024,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":3.8,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"pre","p":"BOD","v":10.8,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"during","p":"BOD","v":11.2,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Durga","ph":"after","p":"BOD","v":11.6,"flag":"","pg":26,"bad":true},{"y":2024,"f":"Ganesh","ph":"pre","p":"pH","v":7.88,"flag":"","pg":72,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"pH","v":7.61,"flag":"","pg":72,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"pH","v":7.92,"flag":"","pg":72,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":7.4,"flag":"","pg":72,"bad":false},{"y":2024,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.8,"flag":"","pg":72,"bad":false},{"y":2024,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.3,"flag":"","pg":72,"bad":false},{"y":2024,"f":"Ganesh","ph":"pre","p":"BOD","v":5.8,"flag":"","pg":72,"bad":true},{"y":2024,"f":"Ganesh","ph":"during","p":"BOD","v":10.0,"flag":"","pg":72,"bad":true},{"y":2024,"f":"Ganesh","ph":"after","p":"BOD","v":6.8,"flag":"","pg":72,"bad":true},{"y":2025,"f":"Ganesh","ph":"pre","p":"pH","v":7.7,"flag":"","pg":30,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"pH","v":7.82,"flag":"","pg":30,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"pH","v":7.84,"flag":"","pg":30,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"Dissolved oxygen","v":7.0,"flag":"","pg":30,"bad":false},{"y":2025,"f":"Ganesh","ph":"during","p":"Dissolved oxygen","v":6.0,"flag":"","pg":30,"bad":false},{"y":2025,"f":"Ganesh","ph":"after","p":"Dissolved oxygen","v":6.5,"flag":"","pg":30,"bad":false},{"y":2025,"f":"Ganesh","ph":"pre","p":"BOD","v":4.2,"flag":"","pg":30,"bad":true},{"y":2025,"f":"Ganesh","ph":"during","p":"BOD","v":5.0,"flag":"","pg":30,"bad":true},{"y":2025,"f":"Ganesh","ph":"after","p":"BOD","v":4.8,"flag":"","pg":30,"bad":true},{"y":2025,"f":"Durga","ph":"pre","p":"pH","v":7.88,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"during","p":"pH","v":7.36,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"after","p":"pH","v":7.35,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"Dissolved oxygen","v":2.5,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"Dissolved oxygen","v":2.8,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"Dissolved oxygen","v":7.4,"flag":"","pg":65,"bad":false},{"y":2025,"f":"Durga","ph":"pre","p":"BOD","v":6.8,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"during","p":"BOD","v":11.4,"flag":"","pg":65,"bad":true},{"y":2025,"f":"Durga","ph":"after","p":"BOD","v":10.4,"flag":"","pg":65,"bad":true}]}],"brief":{"en":"VISARJAN GHAT WATCH: brief for the BMC officer\nDurga Visarjan: 20 October 2026\n\nBasis: MPPCB water tests at 7 Bhopal ghats, 2023 to 2025, compared with CPCB class B (outdoor bathing) limits: dissolved oxygen (DO) 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5.\n\nHeadline: across all readings, DO was below 5 mg/l in 42 of 116 tests and BOD was above 3 mg/l in 100 of 112 tests.\n\nRanking (relative priority for extra cleaning, aeration and testing):\n1. Bairagarh (Sant Hirdaram) kund, score 42/100: DO below limit in 11 of 13 tests, BOD above limit in 13 of 13 tests.\n2. Malikhedi kund, score 31/100: DO below limit in 9 of 13 tests, BOD above limit in 11 of 13 tests.\n3. Shahpura lake ghat, score 28/100: DO below limit in 5 of 18 tests, BOD above limit in 18 of 18 tests.\n4. Rani Kamlapati ghat / Kamla Park kund, score 26/100: DO below limit in 6 of 18 tests, BOD above limit in 18 of 18 tests.\n5. Hathaikheda dam / kund, score 23/100: DO below limit in 0 of 18 tests, BOD above limit in 16 of 18 tests.\n6. Khatlapura ghat, score 22/100: DO below limit in 8 of 18 tests, BOD above limit in 15 of 17 tests.\n7. Prempura ghat, score 13/100: DO below limit in 3 of 18 tests, BOD above limit in 9 of 15 tests.\n\nSuggested before 20 October:\n- Bairagarh (Sant Hirdaram) kund: Prioritise aeration or other oxygen support before immersion. Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit). Test before 20 October to fill the data gaps.\n  Data gaps: No Durga 2025 table in the MPPCB report, so there is no data for it. Ganesh 2025, before immersion and one week after: DO, BOD, pH not sampled.\n- Malikhedi kund: Prioritise aeration or other oxygen support before immersion. Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit). Test before 20 October to fill the data gaps.\n  Data gaps: No Durga 2025 table in the MPPCB report, so there is no data for it. Ganesh 2025, before immersion and one week after: DO, BOD, pH not sampled.\n- Shahpura lake ghat: Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).\n- Any new ghat has no readings in this data. Take a baseline test before it is used.\n\nLimits of this brief:\n- This is a relative ranking of the 7 ghats, not a safe or unsafe verdict. Even the lowest-ranked ghat went beyond a limit in 14 of 50 tests.\n- A blank in the MPPCB reports means not sampled, never clean. Total coliform is not in this data.\n- The reports print no units. Standard units are assumed. No health effects are claimed.\n- Every number can be traced to its MPPCB report page in the tool.","hi":"विसर्जन घाट वॉच: नगर निगम अधिकारी के लिए संक्षिप्त रिपोर्ट\nदुर्गा विसर्जन: 20 अक्टूबर 2026\n\nआधार: भोपाल के 7 घाटों पर MPPCB की 2023 से 2025 की जल-जाँच, CPCB श्रेणी-B (खुले में स्नान) के मानकों से तुलना: घुली ऑक्सीजन (DO) 5 mg/l या अधिक, BOD 3 mg/l या कम, pH 6.5 से 8.5।\n\nमुख्य बात: सभी जाँचों में DO 116 में से 42 बार 5 mg/l से कम और BOD 112 में से 100 बार 3 mg/l से अधिक रहा।\n\nप्राथमिकता क्रम (अतिरिक्त सफाई, एयरेशन और जाँच के लिए):\n1. बैरागढ़ (संत हिरदाराम) कुंड, अंक 42/100: DO मानक से कम 13 में से 11 जाँच में, BOD मानक से अधिक 13 में से 13 जाँच में।\n2. मालीखेड़ी कुंड, अंक 31/100: DO मानक से कम 13 में से 9 जाँच में, BOD मानक से अधिक 13 में से 11 जाँच में।\n3. शाहपुरा लेक घाट, अंक 28/100: DO मानक से कम 18 में से 5 जाँच में, BOD मानक से अधिक 18 में से 18 जाँच में।\n4. रानी कमलापति घाट / कमला पार्क कुंड, अंक 26/100: DO मानक से कम 18 में से 6 जाँच में, BOD मानक से अधिक 18 में से 18 जाँच में।\n5. हथाईखेड़ा डैम / कुंड, अंक 23/100: DO मानक से कम 18 में से 0 जाँच में, BOD मानक से अधिक 18 में से 16 जाँच में।\n6. खटलापुरा घाट, अंक 22/100: DO मानक से कम 18 में से 8 जाँच में, BOD मानक से अधिक 17 में से 15 जाँच में।\n7. प्रेमपुरा घाट, अंक 13/100: DO मानक से कम 18 में से 3 जाँच में, BOD मानक से अधिक 15 में से 9 जाँच में।\n\n20 अक्टूबर से पहले सुझाव:\n- बैरागढ़ (संत हिरदाराम) कुंड: विसर्जन से पहले एयरेशन या ऑक्सीजन बढ़ाने के उपाय को प्राथमिकता दें। जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)। डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।\n  डेटा की कमियाँ: MPPCB रिपोर्ट में दुर्गा 2025 की तालिका नहीं है, इसलिए इसका कोई डेटा नहीं है। गणेश 2025, विसर्जन से पहले और विसर्जन के एक सप्ताह बाद: DO, BOD, pH की जाँच नहीं हुई।\n- मालीखेड़ी कुंड: विसर्जन से पहले एयरेशन या ऑक्सीजन बढ़ाने के उपाय को प्राथमिकता दें। जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)। डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।\n  डेटा की कमियाँ: MPPCB रिपोर्ट में दुर्गा 2025 की तालिका नहीं है, इसलिए इसका कोई डेटा नहीं है। गणेश 2025, विसर्जन से पहले और विसर्जन के एक सप्ताह बाद: DO, BOD, pH की जाँच नहीं हुई।\n- शाहपुरा लेक घाट: जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।\n- कोई भी नया घाट इस डेटा में नहीं है। उपयोग से पहले आधारभूत जाँच कराएँ।\n\nइस रिपोर्ट की सीमाएँ:\n- यह 7 घाटों का सापेक्ष क्रम है, सुरक्षित या असुरक्षित का फ़ैसला नहीं। सबसे नीचे वाला घाट भी 50 में से 14 जाँच में किसी मानक से बाहर रहा।\n- MPPCB रिपोर्ट में खाली जगह का मतलब जाँच नहीं हुई, साफ़ नहीं। कुल कॉलिफ़ॉर्म इस डेटा में नहीं है।\n- रिपोर्ट में इकाइयाँ नहीं छपी हैं, मानक इकाइयाँ मानी गई हैं। स्वास्थ्य पर असर का कोई दावा नहीं किया गया है।\n- हर संख्या को टूल में MPPCB रिपोर्ट के पेज से मिलाया जा सकता है।"}};
+
+/* ---------- text ---------- */
+const UI = {
+  en: {
+    title: 'Visarjan Ghat Watch',
+    sub: 'Which Bhopal ghats need attention first before Durga visarjan? Built from three years of MPPCB water tests, compared with CPCB limits.',
+    tab_rank: 'Ranking', tab_brief: 'Brief to forward', tab_method: 'Method and limits',
+    days: '{n} days to Durga visarjan (20 Oct 2026)', today: 'Durga visarjan is today (20 Oct 2026)',
+    banner: 'This is a relative ranking of the 7 ghats that have MPPCB test data. It is not a safe or unsafe verdict and says nothing about health. A blank reading is shown as missing, never as clean.',
+    h_do: 'DO readings below 5 mg/l', h_bod: 'BOD readings above 3 mg/l', h_zero: 'DO readings of 0 mg/l at Bairagarh kund',
+    basis: 'Ranking view',
+    legend_title: 'Priority is relative:',
+    p1: 'Priority 1: act first', p2: 'Priority 2: watch closely', p3: 'Priority 3: lower relative risk',
+    p1s: 'Score 40 or more', p2s: 'Score 25 to 39', p3s: 'Score below 25',
+    score: 'Risk score', conf: 'Data confidence', High: 'High', Medium: 'Medium', Low: 'Low',
+    used: '{a} readings used (of {b} possible)',
+    same_rank: 'Rank #{a} in every view', range_rank: 'Rank #{a} to #{b} across views',
+    why: 'Why this rank', todo: 'Suggested before 20 October', details: 'Show charts, readings and report pages',
+    gaps: 'Data gaps (missing, not clean)', nogaps: 'No gaps in the scored readings.',
+    charts_note: 'Each block is one festival. Its dots go left to right: before, during, one week after immersion. Dashed red line = CPCB class B limit.',
+    leg_ok: 'within limit', leg_bad: 'beyond limit', leg_miss: 'not sampled', leg_none: 'no table in report',
+    chart_do: 'Dissolved oxygen (mg/l), limit: 5 or more', chart_bod: 'BOD (mg/l), limit: 3 or less', chart_ph: 'pH, limit: 6.5 to 8.5',
+    table: 'All scored readings with report page', col_event: 'Festival', col_phase: 'When', col_page: 'Report page',
+    sources: 'Source reports', page: 'p.', no_table: 'No table in the MPPCB report',
+    copy: 'Copy brief', copy_both: 'Copy English and Hindi', copied: 'Copied', print: 'Print or save as PDF',
+    brief_note: 'Generated from the default ranking view. Every number comes straight from the readings.',
+    built: 'Built {d}. Open source (MIT). Data: MPPCB reports 2023 to 2025 and CPCB water-quality criteria.',
+    nodata: 'no data'
+  },
+  hi: {
+    title: 'विसर्जन घाट वॉच',
+    sub: 'दुर्गा विसर्जन से पहले भोपाल के किन घाटों पर सबसे पहले ध्यान देना चाहिए? MPPCB की तीन वर्षों की जल-जाँच, CPCB मानकों से तुलना करके।',
+    tab_rank: 'क्रम सूची', tab_brief: 'आगे भेजने के लिए रिपोर्ट', tab_method: 'तरीका और सीमाएँ',
+    days: 'दुर्गा विसर्जन (20 अक्टूबर 2026) में {n} दिन बाकी', today: 'आज दुर्गा विसर्जन है (20 अक्टूबर 2026)',
+    banner: 'यह MPPCB जाँच-डेटा वाले 7 घाटों का सापेक्ष क्रम है। यह सुरक्षित या असुरक्षित का फ़ैसला नहीं है और स्वास्थ्य के बारे में कुछ नहीं कहता। खाली आँकड़ा "डेटा नहीं" दिखाया गया है, "साफ़" नहीं।',
+    h_do: 'DO जाँच 5 mg/l से कम', h_bod: 'BOD जाँच 3 mg/l से अधिक', h_zero: 'बैरागढ़ कुंड पर DO = 0 mg/l की जाँचें',
+    basis: 'क्रम का दृष्टिकोण',
+    legend_title: 'प्राथमिकता सापेक्ष है:',
+    p1: 'प्राथमिकता 1: सबसे पहले कार्रवाई', p2: 'प्राथमिकता 2: नज़र रखें', p3: 'प्राथमिकता 3: सापेक्ष रूप से कम जोखिम',
+    p1s: 'अंक 40 या अधिक', p2s: 'अंक 25 से 39', p3s: 'अंक 25 से कम',
+    score: 'जोखिम अंक', conf: 'डेटा की विश्वसनीयता', High: 'उच्च', Medium: 'मध्यम', Low: 'कम',
+    used: '{a} जाँच इस्तेमाल हुईं (कुल संभव {b})',
+    same_rank: 'हर दृष्टिकोण में क्रम #{a}', range_rank: 'दृष्टिकोणों में क्रम #{a} से #{b}',
+    why: 'यह क्रम क्यों', todo: '20 अक्टूबर से पहले सुझाव', details: 'ग्राफ़, जाँच-आँकड़े और रिपोर्ट के पेज देखें',
+    gaps: 'डेटा की कमियाँ (खाली मतलब साफ़ नहीं)', nogaps: 'अंक वाली जाँचों में कोई कमी नहीं।',
+    charts_note: 'हर खंड एक त्योहार है। उसके बिंदु बाएँ से दाएँ: विसर्जन से पहले, दौरान, एक सप्ताह बाद। लाल बिंदीदार रेखा = CPCB श्रेणी-B की सीमा।',
+    leg_ok: 'सीमा के भीतर', leg_bad: 'सीमा से बाहर', leg_miss: 'जाँच नहीं हुई', leg_none: 'रिपोर्ट में तालिका नहीं',
+    chart_do: 'घुली ऑक्सीजन (mg/l), सीमा: 5 या अधिक', chart_bod: 'BOD (mg/l), सीमा: 3 या कम', chart_ph: 'pH, सीमा: 6.5 से 8.5',
+    table: 'अंक वाली सभी जाँचें, रिपोर्ट पेज सहित', col_event: 'त्योहार', col_phase: 'कब', col_page: 'रिपोर्ट पेज',
+    sources: 'स्रोत रिपोर्टें', page: 'पेज', no_table: 'MPPCB रिपोर्ट में तालिका नहीं',
+    copy: 'रिपोर्ट कॉपी करें', copy_both: 'अंग्रेज़ी और हिंदी दोनों कॉपी करें', copied: 'कॉपी हो गया', print: 'प्रिंट या PDF सहेजें',
+    brief_note: 'डिफ़ॉल्ट क्रम से बनी। हर संख्या सीधे जाँच-आँकड़ों से ली गई है।',
+    built: 'बनाया गया {d}। ओपन सोर्स (MIT)। डेटा: MPPCB रिपोर्टें 2023 से 2025 और CPCB जल-गुणवत्ता मानक।',
+    nodata: 'डेटा नहीं'
+  }
+};
+
+const METHOD = {
+  en: [
+    { h: 'What this tool does', p: ['It lines up three years of MPPCB water tests at 7 Bhopal immersion ghats against the legal limits, ranks the ghats by relative risk, and writes a short brief the officer can forward. Every number links back to its report page.'] },
+    { h: 'Which limit we use, and why', p: ['CPCB class B, "outdoor bathing (organised)". Immersion ghats are places where people stand in and touch the water, and class B is the CPCB class built for that use. Three limits from class B exist in the data: dissolved oxygen (DO) 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5. Class B also has a total coliform limit (500 MPN/100 ml), but coliform is not in the readings, so it is not scored.'] },
+    { h: 'How the score works', items: [
+      'Each DO, BOD and pH reading gets a severity from 0 (within the limit) to 1. Any breach scores at least 0.3. It grows to 1.0 for DO of 0, BOD of 12 mg/l or more, or pH 1.5 units outside the range. The 0.3 floor is a judgement call so that every breach counts clearly.',
+      'The ghat score is the weighted average severity of its readings, times 100. In the default view, 2025 readings count 3 times, 2024 readings 2 times, 2023 readings once, because the officer plans for now.',
+      'Missing readings are left out of the average. They are never counted as clean. The coverage and the confidence badge show how many readings back each score.',
+      'Priority 1 is a score of 40 or more, Priority 2 is 25 to 39, Priority 3 is below 25. The cut-offs are a simple choice for sorting, not a safety threshold.'] },
+    { h: 'Does the ranking hold if the weighting changes?', p: ['The page offers three views (default, Durga only, 2025 only). The CSV in the repo also has an equal-weight check. The top ghat and the bottom ghat stay the same in every view, and the middle ghats swap places. Each card says how far its rank moves.'] },
+    { h: 'What the data does not cover', items: [
+      'Total coliform was not in the readings. Metals (chromium, lead, zinc, copper) are shown for context only because class B sets no limit for them.',
+      'The reports print no units. Standard units are assumed (mg/l, NTU, µS/cm). BDL means below detection limit: very low, not zero, not missing.',
+      'A blank, "-", "*" or "**" means not sampled. Bairagarh kund and Malikhedi kund have no Durga 2025 table, and their Ganesh 2025 tests cover only the during-immersion stage.',
+      '"Rani Kamlapati ghat / Kamla Park kund" may cover two places (Ganesh tables say Kamla Park kund, Durga tables say Lower Lake ghat).',
+      'The NGT has banned immersion in the Upper and Lower Lakes and BMC is building new ghats. New ghats have no readings here, so this tool cannot rank them. Which ghats are used on 20 October is for BMC to confirm.',
+      'The tool reports readings against limits. It does not claim any health effect.'] },
+    { h: 'Data and sources', p: ['MPPCB Ganesh and Durga Visarjan reports 2023, 2024 and 2025, as compiled in the Bhopal Impact Lab 2026 participant pack (1,524 readings), and CPCB water-quality criteria. Source links are in the card details and in the README.'] }
+  ],
+  hi: [
+    { h: 'यह टूल क्या करता है', p: ['यह भोपाल के 7 विसर्जन घाटों पर MPPCB की तीन वर्षों की जल-जाँच को कानूनी मानकों से मिलाता है, घाटों को सापेक्ष जोखिम के क्रम में रखता है, और अधिकारी के आगे भेजने लायक छोटी रिपोर्ट बनाता है। हर संख्या अपने रिपोर्ट-पेज से जुड़ी है।'] },
+    { h: 'कौन-सा मानक और क्यों', p: ['CPCB श्रेणी-B, "खुले में स्नान (संगठित)"। विसर्जन घाटों पर लोग पानी में खड़े होते हैं और उसे छूते हैं, और श्रेणी-B इसी उपयोग के लिए है। डेटा में श्रेणी-B की तीन सीमाएँ हैं: घुली ऑक्सीजन (DO) 5 mg/l या अधिक, BOD 3 mg/l या कम, pH 6.5 से 8.5। श्रेणी-B में कुल कॉलिफ़ॉर्म (500 MPN/100 ml) की भी सीमा है, पर कॉलिफ़ॉर्म जाँच-आँकड़ों में नहीं है, इसलिए उसे अंक नहीं दिए गए।'] },
+    { h: 'अंक कैसे बनता है', items: [
+      'हर DO, BOD और pH जाँच को 0 (सीमा के भीतर) से 1 तक गंभीरता मिलती है। सीमा टूटने पर कम से कम 0.3। DO = 0, BOD 12 mg/l या अधिक, या pH सीमा से 1.5 इकाई बाहर होने पर 1.0। 0.3 का न्यूनतम मान हमारा निर्णय है ताकि हर उल्लंघन साफ़ गिना जाए।',
+      'घाट का अंक उसकी जाँचों की भारित औसत गंभीरता × 100 है। डिफ़ॉल्ट दृष्टिकोण में 2025 की जाँच 3 गुना, 2024 की 2 गुना, 2023 की 1 गुना गिनी जाती है, क्योंकि अधिकारी वर्तमान के लिए योजना बनाता है।',
+      'जो जाँच नहीं हुई उसे औसत से बाहर रखा जाता है। उसे कभी "साफ़" नहीं गिना जाता। हर अंक के पीछे कितनी जाँचें हैं, यह कवरेज और विश्वसनीयता-बैज में दिखता है।',
+      'प्राथमिकता 1 = अंक 40 या अधिक, प्राथमिकता 2 = 25 से 39, प्राथमिकता 3 = 25 से कम। ये सीमाएँ छाँटने का सरल तरीका हैं, सुरक्षा की सीमा नहीं।'] },
+    { h: 'क्या भार बदलने पर भी क्रम टिकता है?', p: ['पेज पर तीन दृष्टिकोण हैं (डिफ़ॉल्ट, केवल दुर्गा, केवल 2025)। रिपोर्ट के CSV में बराबर-भार वाली जाँच भी है। सबसे ऊपर और सबसे नीचे वाला घाट हर दृष्टिकोण में वही रहता है, बीच के घाट आपस में जगह बदलते हैं। हर कार्ड बताता है कि उसका क्रम कितना हिलता है।'] },
+    { h: 'डेटा में क्या नहीं है', items: [
+      'कुल कॉलिफ़ॉर्म जाँच-आँकड़ों में नहीं था। धातुएँ (क्रोमियम, लेड, ज़िंक, कॉपर) केवल जानकारी के लिए दिखाई गई हैं क्योंकि श्रेणी-B में इनकी कोई सीमा नहीं है।',
+      'रिपोर्ट में इकाइयाँ नहीं छपी हैं। मानक इकाइयाँ मानी गई हैं (mg/l, NTU, µS/cm)। BDL का मतलब पहचान-सीमा से नीचे: बहुत कम, शून्य नहीं, गायब नहीं।',
+      'खाली, "-", "*" या "**" का मतलब जाँच नहीं हुई। बैरागढ़ कुंड और मालीखेड़ी कुंड की दुर्गा 2025 की तालिका नहीं है, और उनकी गणेश 2025 की जाँच केवल विसर्जन के दौरान की है।',
+      '"रानी कमलापति घाट / कमला पार्क कुंड" दो स्थान हो सकते हैं (गणेश तालिकाओं में कमला पार्क कुंड, दुर्गा तालिकाओं में लोअर लेक घाट)।',
+      'NGT ने ऊपरी और निचले तालाब में विसर्जन पर रोक लगाई है और नगर निगम नए घाट बना रहा है। नए घाटों का कोई डेटा यहाँ नहीं है, इसलिए टूल उन्हें क्रम में नहीं रख सकता। 20 अक्टूबर को कौन-से घाट काम में आएँगे, यह नगर निगम तय करे।',
+      'टूल जाँच-आँकड़ों को मानकों से मिलाता है। स्वास्थ्य पर किसी असर का दावा नहीं करता।'] },
+    { h: 'डेटा और स्रोत', p: ['MPPCB की गणेश और दुर्गा विसर्जन रिपोर्टें 2023, 2024 और 2025, जैसी भोपाल इम्पैक्ट लैब 2026 के प्रतिभागी पैक में संकलित हैं (1,524 जाँच-आँकड़े), और CPCB जल-गुणवत्ता मानक। स्रोत लिंक कार्ड के विवरण और README में हैं।'] }
+  ]
+};
+
+const EVENTS = [['Ganesh',2023],['Durga',2023],['Ganesh',2024],['Durga',2024],['Ganesh',2025],['Durga',2025]];
+const PHASES = ['pre','during','after'];
+const FEST = { en: {Ganesh:'Ganesh', Durga:'Durga'}, hi: {Ganesh:'गणेश', Durga:'दुर्गा'} };
+const PHN = { en: {pre:'before', during:'during', after:'1 week after'}, hi: {pre:'पहले', during:'दौरान', after:'1 सप्ताह बाद'} };
+const POSS = { recency: 54, durga: 27, latest: 18 };
+const PCFG = {
+  'Dissolved oxygen': { min:0, max:12, ticks:[0,5,10], limits:[5], unit:' mg/l', key:'chart_do' },
+  'BOD':              { min:0, max:24, ticks:[0,3,12,24], limits:[3], unit:' mg/l', key:'chart_bod' },
+  'pH':               { min:5.5, max:9.5, ticks:[6,6.5,7,8,8.5,9], limits:[6.5,8.5], unit:'', key:'chart_ph' }
+};
+
+/* ---------- state ---------- */
+let lang = 'en', basis = D.default_basis, tab = 'rank';
+const openCards = new Set();
+try { const s = localStorage.getItem('gw_lang'); if (s === 'hi' || s === 'en') lang = s; } catch (e) {}
+
+const t = k => UI[lang][k];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => String(n).replace(/\.0$/, '');
+const fill = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k]);
+const pageLink = (yr, pg) => `<a href="${esc(D.meta.reports[yr].url)}#page=${pg}" target="_blank" rel="noopener">${t('page')} ${pg}</a>`;
+
+/* ---------- pieces ---------- */
+function daysLeft() {
+  const target = new Date(D.meta.durga_date + 'T00:00:00+05:30').getTime();
+  const n = Math.ceil((target - Date.now()) / 86400000);
+  if (n > 0) return fill(t('days'), { n });
+  if (n === 0 || (n < 0 && n > -1)) return t('today');
+  return '';
+}
+
+function confidenceFor(g, sc) {
+  const poss = POSS[basis] || D.meta.expected_per_ghat;
+  const c = sc.tested / poss;
+  let level = c >= 0.9 ? 'High' : c >= 0.6 ? 'Medium' : 'Low';
+  if (g.m.medium_site_match && level === 'High') level = 'Medium';
+  return { level, poss };
+}
+
+function chart(g, param) {
+  const c = PCFG[param];
+  const W = 640, H = 170, ml = 34, mr = 8, mt = 10, mb = 30;
+  const pw = W - ml - mr, ph = H - mt - mb, cw = pw / 6;
+  const y = v => mt + (c.max - Math.min(Math.max(v, c.min), c.max)) / (c.max - c.min) * ph;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(t(c.key))}">`;
+  EVENTS.forEach(([f, yr], ei) => {
+    const x0 = ml + ei * cw;
+    s += `<rect x="${x0}" y="${mt}" width="${cw}" height="${ph}" fill="${ei % 2 === 0 ? 'var(--band)' : 'transparent'}"/>`;
+    const evMissing = g.missing_events.some(e => e[0] === f && e[1] === yr);
+    s += `<text class="evl" x="${x0 + cw / 2}" y="${H - 10}">${esc(FEST[lang][f])} '${String(yr).slice(2)}</text>`;
+    if (evMissing) {
+      s += `<rect x="${x0 + 3}" y="${mt}" width="${cw - 6}" height="${ph}" fill="url(#hatch)"><title>${esc(t('no_table'))}</title></rect>`;
+      s += `<text class="none" x="${x0 + cw / 2}" y="${mt + ph / 2}">${esc(t('leg_none'))}</text>`;
+      return;
+    }
+    const pts = [];
+    PHASES.forEach((phs, pi) => {
+      const x = x0 + cw * (0.2 + 0.3 * pi);
+      const r = g.readings.find(q => q.p === param && q.f === f && q.y === yr && q.ph === phs);
+      const label = `${FEST[lang][f]} ${yr}, ${PHN[lang][phs]}`;
+      if (!r || r.v === null) {
+        s += `<text class="miss" x="${x}" y="${y(c.min) - 5}">×<title>${esc(label)}: ${esc(t('leg_miss'))}</title></text>`;
+        return;
+      }
+      pts.push([x, y(r.v)]);
+      const tip = `${label}: ${fmt(r.v)}${c.unit} (${t('page')} ${r.pg})`;
+      s += `<circle class="${r.bad ? 'ptbad' : 'ptok'}" cx="${x}" cy="${y(r.v)}" r="4.5"><title>${esc(tip)}</title></circle>`;
+    });
+    if (pts.length > 1) s += `<polyline class="join" points="${pts.map(p => p.join(',')).join(' ')}"/>`;
+  });
+  c.ticks.forEach(v => {
+    const isLim = c.limits.includes(v);
+    s += `<line class="grid" x1="${ml}" x2="${W - mr}" y1="${y(v)}" y2="${y(v)}"/>`;
+    s += `<text class="tick${isLim ? ' limtick' : ''}" x="${ml - 5}" y="${y(v) + 3}">${v}</text>`;
+  });
+  c.limits.forEach(v => { s += `<line class="lim" x1="${ml}" x2="${W - mr}" y1="${y(v)}" y2="${y(v)}"/>`; });
+  return s + '</svg>';
+}
+
+function readingsTable(g) {
+  const cell = (r, pbad) => {
+    if (!r || r.v === null) return `<td class="num missing" title="${esc(t('leg_miss'))}">${esc('—')}</td>`;
+    return `<td class="num${r.bad ? ' bad' : ''}">${fmt(r.v)}</td>`;
+  };
+  let rows = '';
+  EVENTS.forEach(([f, yr]) => {
+    if (g.missing_events.some(e => e[0] === f && e[1] === yr)) {
+      rows += `<tr class="noevent"><td>${esc(FEST[lang][f])} ${yr}</td><td colspan="5">${esc(t('no_table'))}</td></tr>`;
+      return;
+    }
+    PHASES.forEach(phs => {
+      const get = p => g.readings.find(q => q.p === p && q.f === f && q.y === yr && q.ph === phs);
+      const rr = [get('pH'), get('Dissolved oxygen'), get('BOD')];
+      const pages = [...new Set(rr.filter(r => r && r.pg).map(r => r.pg))].sort((a, b) => a - b);
+      rows += `<tr><td>${esc(FEST[lang][f])} ${yr}</td><td>${esc(PHN[lang][phs])}</td>${rr.map(cell).join('')}<td>${pages.map(p => pageLink(yr, p)).join(', ')}</td></tr>`;
+    });
+  });
+  return `<div class="tablewrap"><table><thead><tr><th>${t('col_event')}</th><th>${t('col_phase')}</th><th class="num">pH</th><th class="num">DO mg/l</th><th class="num">BOD mg/l</th><th>${t('col_page')}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function card(g) {
+  const sc = g.scores[basis];
+  const pr = sc.priority || 3;
+  const cf = confidenceFor(g, sc);
+  const rr = g.rank_range[0] === g.rank_range[1]
+    ? fill(t('same_rank'), { a: g.rank_range[0] })
+    : fill(t('range_rank'), { a: g.rank_range[0], b: g.rank_range[1] });
+  const isOpen = openCards.has(g.id) ? ' open' : '';
+  const years = [...new Set(g.readings.map(r => r.y))];
+  return `
+  <article class="card p${pr}">
+    <div class="card-top">
+      <div class="rank">${sc.rank}</div>
+      <div class="card-main">
+        <h2>${esc(g['name_' + lang])}</h2>
+        <div class="body-name">${esc(g['body_' + lang])}</div>
+        <div class="badges">
+          <span class="badge p${pr}">${esc(t('p' + pr))}</span>
+          <span class="badge${cf.level === 'High' ? '' : ' low'}">${esc(t('conf'))}: ${esc(t(cf.level))}</span>
+          <span class="badge">${esc(rr)}</span>
+        </div>
+        <div class="scorerow"><span>${esc(t('score'))}</span>
+          <div class="bar"><span style="width:${sc.score === null ? 0 : sc.score}%"></span></div>
+          <span class="scorenum">${sc.score === null ? esc(t('nodata')) : Math.round(sc.score)}/100</span></div>
+        <div class="note">${esc(fill(t('used'), { a: sc.tested, b: cf.poss }))}</div>
+        <div class="sec">${esc(t('why'))}</div>
+        <ul>${g.reasons[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        <div class="sec">${esc(t('todo'))}</div>
+        <ul>${g.actions[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        <details data-id="${esc(g.id)}"${isOpen}>
+          <summary>${esc(t('details'))}</summary>
+          <div class="sec">${esc(t('gaps'))}</div>
+          ${g.gaps[lang].length ? `<ul>${g.gaps[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : `<p class="note">${esc(t('nogaps'))}</p>`}
+          <p class="note">${esc(t('charts_note'))}</p>
+          <div class="keyrow"><span><i class="dot ok"></i>${esc(t('leg_ok'))}</span><span><i class="dot bad"></i>${esc(t('leg_bad'))}</span><span>× ${esc(t('leg_miss'))}</span><span>▨ ${esc(t('leg_none'))}</span></div>
+          ${['Dissolved oxygen', 'BOD', 'pH'].map(p => `<div class="chart-title">${esc(t(PCFG[p].key))}</div>${chart(g, p)}`).join('')}
+          <div class="chart-title">${esc(t('table'))}</div>
+          ${readingsTable(g)}
+          ${g.metals[lang] ? `<p class="note">${esc(g.metals[lang])}</p>` : ''}
+          <p class="note"><b>${esc(t('sources'))}:</b> ${years.map(y => `<a href="${esc(D.meta.reports[y].url)}" target="_blank" rel="noopener">${esc(D.meta.reports[y].name)}</a>`).join(' · ')}</p>
+        </details>
+      </div>
+    </div>
+  </article>`;
+}
+
+function rankView() {
+  const h = D.headline;
+  const list = [...D.ghats].sort((a, b) => a.scores[basis].rank - b.scores[basis].rank);
+  const b = D.bases.find(x => x.id === basis);
+  return `
+  <div class="banner">${esc(t('banner'))}</div>
+  <div class="stats">
+    <div class="stat"><b>${h.do_below}/${h.do_tested}</b><span>${esc(t('h_do'))}</span></div>
+    <div class="stat"><b>${h.bod_above}/${h.bod_tested}</b><span>${esc(t('h_bod'))}</span></div>
+    <div class="stat"><b>${h.bairagarh_do_zero}</b><span>${esc(t('h_zero'))}</span></div>
+  </div>
+  <div class="basis"><span class="label">${esc(t('basis'))}</span>
+    <div class="seg">${D.bases.map(x => `<button data-basis="${x.id}" aria-pressed="${x.id === basis}">${esc(x[lang])}</button>`).join('')}</div>
+    <div class="basis-desc">${esc(b['desc_' + lang])}</div></div>
+  <div class="legend"><span>${esc(t('legend_title'))}</span>
+    <span class="chip p1">${esc(t('p1s'))}</span><span class="chip p2">${esc(t('p2s'))}</span><span class="chip p3">${esc(t('p3s'))}</span></div>
+  ${list.map(card).join('')}`;
+}
+
+function briefView() {
+  return `
+  <p class="note">${esc(t('brief_note'))}</p>
+  <div class="actions">
+    <button class="primary" data-copy="one">${esc(t('copy'))}</button>
+    <button class="ghost" data-copy="both">${esc(t('copy_both'))}</button>
+    <button class="ghost" data-print="1">${esc(t('print'))}</button>
+  </div>
+  <pre class="brief" id="brief">${esc(D.brief[lang])}</pre>`;
+}
+
+function methodView() {
+  return `<div class="method">${METHOD[lang].map(sec => `
+    <h2>${esc(sec.h)}</h2>
+    ${(sec.p || []).map(p => `<p>${esc(p)}</p>`).join('')}
+    ${sec.items ? `<ul>${sec.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : ''}`).join('')}</div>`;
+}
+
+function shell() {
+  const left = daysLeft();
+  return `
+  <header>
+    <div>
+      <h1>🌊 ${esc(t('title'))}</h1>
+      <p class="sub">${esc(t('sub'))}</p>
+      ${left ? `<span class="countdown">${esc(left)}</span>` : ''}
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="en" aria-pressed="${lang === 'en'}">EN</button>
+      <button data-lang="hi" aria-pressed="${lang === 'hi'}">हिं</button>
+    </div>
+  </header>
+  <nav class="tabs" role="tablist">
+    ${[['rank', 'tab_rank'], ['brief', 'tab_brief'], ['method', 'tab_method']].map(([k, l]) =>
+      `<button role="tab" data-tab="${k}" aria-selected="${tab === k}">${esc(t(l))}</button>`).join('')}
+  </nav>
+  <main>${tab === 'rank' ? rankView() : tab === 'brief' ? briefView() : methodView()}</main>
+  <footer>${esc(fill(t('built'), { d: D.meta.built }))}</footer>`;
+}
+
+async function copyText(txt, btn) {
+  try { await navigator.clipboard.writeText(txt); }
+  catch (e) {
+    const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (_) {} ta.remove();
+  }
+  const old = btn.textContent; btn.textContent = t('copied');
+  setTimeout(() => { btn.textContent = old; }, 1500);
+}
+
+function render() {
+  document.documentElement.lang = lang;
+  document.getElementById('app').innerHTML = shell();
+}
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  if (b.dataset.lang) { lang = b.dataset.lang; try { localStorage.setItem('gw_lang', lang); } catch (_) {} render(); }
+  else if (b.dataset.tab) { tab = b.dataset.tab; render(); }
+  else if (b.dataset.basis) { basis = b.dataset.basis; render(); }
+  else if (b.dataset.copy) { copyText(b.dataset.copy === 'both' ? D.brief.en + '\n\n' + '────────\n\n' + D.brief.hi : D.brief[lang], b); }
+  else if (b.dataset.print) { window.print(); }
+});
+document.addEventListener('toggle', e => {
+  const d = e.target;
+  if (d && d.tagName === 'DETAILS' && d.dataset.id) { d.open ? openCards.add(d.dataset.id) : openCards.delete(d.dataset.id); }
+}, true);
+
+render();
+</script>
+</body>
+</html>

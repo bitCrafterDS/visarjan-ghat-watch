@@ -1,0 +1,8 @@
+﻿rank,ghat,water_body,risk_score_0_100,priority,scored_readings_used,of_possible,data_confidence,DO_below_5,DO_tested,BOD_above_3,BOD_tested,pH_outside_range,pH_tested,DO_zero_readings,rank_in_Durga_only_view,rank_in_2025_only_view,rank_in_equal_weight_check
+1,Bairagarh (Sant Hirdaram) kund,Upper Lake,42.3,1,39,54,Medium,11,13,13,13,0,13,4,1,1,1
+2,Malikhedi kund,Kund,30.6,2,39,54,Medium,9,13,11,13,0,13,0,4,2,2
+3,Shahpura lake ghat,Shahpura Lake,28.0,2,54,54,High,5,18,18,18,0,18,0,2,4,3
+4,Rani Kamlapati ghat / Kamla Park kund,Lower Lake (as printed in Durga tables),25.6,2,54,54,Medium,6,18,18,18,0,18,0,3,3,4
+5,Hathaikheda dam / kund,Hathaikheda dam,22.8,3,54,54,High,0,18,16,18,3,18,0,6,5,6
+6,Khatlapura ghat,Lower Lake,21.6,3,53,54,High,8,18,15,17,1,18,0,5,6,5
+7,Prempura ghat,Upper Lake,12.7,3,50,54,High,3,18,9,15,2,17,0,7,7,7
