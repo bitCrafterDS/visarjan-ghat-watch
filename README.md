@@ -1,93 +1,51 @@
-# Visarjan Ghat Watch
+# GhatWise (Visarjan Ghat Watch)
 
-**Claude Impact Lab × Cerebras Café Compute, Bhopal, 11 October 2026 · Track 2**
+Track: 2 Visarjan Ghat Watch
+Team: PromptPirates (Srishty Singh, Deepanshu Singh, Kartik Singh)
+Event: Claude Impact Lab x Cerebras Cafe Compute, Bhopal, 11 Oct 2026
 
-**Live tool:** https://bitcrafterds.github.io/visarjan-ghat-watch/
+Live site: https://bitcrafterds.github.io/visarjan-ghat-watch/
 
-| | |
-|---|---|
-| **Team**            | PromptPirates |
-| **Members**         | Srishty Singh, Deepanshu Singh, Kartik Singh |
-| **Track** | Track 2: Visarjan Ghat Watch |
-| **The one user** | The Bhopal Municipal Corporation (BMC) officer who plans Durga visarjan at the ghats |
-| **The one outcome** | Before 20 October 2026, the officer knows which ghats need extra cleaning, aeration and testing first, and can forward a short Hindi and English brief |
+## The user
+A Bhopal Municipal Corporation (BMC) officer who has to plan ghat arrangements for Durga visarjan on 20 Oct 2026 and needs to know, in a few minutes, which ghats to look at first and why.
 
 ## What it does
+GhatWise reads the water tests that MPPCB took at 7 Bhopal ghats in 2023 to 2025 (before, during and one week after immersion) and ranks the ghats by relative risk against the CPCB class B limits (DO 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5). Every ghat card gives the reason in plain words, the readings, and a link to the report and page each number came from. A short Hindi and English brief can be copied, printed, sent on WhatsApp or downloaded as CSV, and an action plan turns each ghat's findings into before, during and after tasks.
 
-Three years of MPPCB water tests at 7 Bhopal immersion ghats sit in PDFs nobody reads. This tool lines them up against the CPCB class B (outdoor bathing) limits and gives the officer:
+## Demo
+Screen recording (2 min): [ADD LINK HERE]
 
-1. **A ranked list of the 7 ghats by relative risk**, with the reason for each rank in plain words, in Hindi and English.
-2. **A trace for every number**: charts and a table of every reading, each linked to its page in the MPPCB report.
-3. **A short brief in Hindi and English** that can be copied or printed to PDF and forwarded.
-4. **Honest gaps**: missing readings show as missing (never clean), and each ghat lists what the data does not cover.
-5. **One-tap WhatsApp share and CSV download** of the ranking, so the officer can forward it from a phone.
+## How to run
+1. Open the live site: https://bitcrafterds.github.io/visarjan-ghat-watch/ (nothing to install).
+2. To run it on your own computer, download this repo (Code, then Download ZIP) and unzip it.
+3. Open the `docs` folder and double-click `index.html`. It works offline, except the QR codes, which load a small library from the internet.
+4. The site is one static page: data is embedded in `docs/index.html`, add-ons are in `docs/extras.js`, `extras2.js` and `extras3.js`. There is no server, no build step and no API key.
+5. To publish it, serve the `docs` folder (for example with GitHub Pages).
 
-Headline from the data: DO was below 5 mg/l in 42 of 116 tests, BOD above 3 mg/l in 100 of 112 tests, and Bairagarh kund read 0 mg/l oxygen four times.
-
-## Run it (3 steps)
-
-1. Install Python 3.8 or newer (no other packages needed).
-2. `python3 build.py` (rebuilds `docs/index.html` and the files in `output/`).
-3. Open `docs/index.html` in any browser. It works offline. To host it, turn on GitHub Pages for the `docs/` folder.
-
-Optional: `python3 -m unittest discover tests` runs the checks (headline numbers, "missing is never clean", ranking stability).
-
-## What is in the repo
-
-| Path | What |
-|---|---|
-| `docs/index.html` | The tool: one self-contained page, Hindi and English toggle |
-| `output/ghat_risk_ranking.csv` | The ranking as a spreadsheet, with the rank in every view |
-| `output/brief_en.txt`, `output/brief_hi.txt` | The forwardable brief as plain text |
-| `scoring.py` | The scoring rules (standard library only) |
-| `texts.py` | English and Hindi wording |
-| `build.py`, `src/template.html` | Build script and page template |
-| `data/` | The public Track 2 data used (see below) |
-| `METHOD.md` | How the score works and what it cannot say |
-| `tests/` | Unit tests |
-
-## How the ranking works (short version)
-
-Full detail is in [METHOD.md](METHOD.md) and in the tool's "Method and limits" tab.
-
-- **Limit used:** CPCB class B (outdoor bathing): DO 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5.
-- **Per reading:** 0 if within the limit, otherwise 0.3 to 1.0 depending on how far outside it is.
-- **Per ghat:** weighted average of its readings times 100. In the default view 2025 counts 3x, 2024 counts 2x, 2023 counts 1x.
-- **Missing readings** are left out of the average and reported as gaps. They are never counted as clean.
-- **Stability:** the page offers three views (default, Durga only, 2025 only). The top ghat (Bairagarh kund) and the bottom ghat (Prempura) stay the same in all of them. The middle ghats swap places, and each card says by how much.
-
-## What works and what does not
-
-**Works**
-- Ranking, reasons, charts, readings table with report page links, Hindi and English brief, three ranking views.
-- Runs offline from a single HTML file. No API keys, no network calls, no personal data.
-
-**Does not work or is not covered (honestly)**
-- **Total coliform is not in the data**, although class B has a limit for it. It is not scored.
-- **Metals** (chromium, lead, zinc, copper) are shown for context only, because class B sets no limit for them.
-- **Units are assumed.** The MPPCB reports print none. We use the standard unit for each test.
-- **Bairagarh kund and Malikhedi kund** have no Durga 2025 table, and their Ganesh 2025 tests cover only the during-immersion stage. Their scores rest on fewer readings (confidence badge: Medium).
-- **"Rani Kamlapati ghat / Kamla Park kund"** may be two places. The tool says so and suggests confirming with MPPCB.
-- **New BMC ghats** (after the NGT ban on immersion in the Upper and Lower Lakes) have no readings, so they cannot be ranked. Which ghats are used on 20 October is for BMC to confirm.
-- The score is a **relative ranking**, not a safe or unsafe verdict. It claims **no health effects**.
-- The 0.3 severity floor and the priority cut-offs (40 and 25) are our judgement calls, stated openly in METHOD.md.
-- The Hindi wording and the Hindi spellings of ghat names should be read once by a Hindi speaker before the brief is forwarded.
+## What works, what does not
+- Works:
+  - Ranking of 7 ghats with priority, confidence, reasons and suggested actions, in three views (recency, Durga only, 2025 only).
+  - Every number links to its report and page. A blank means "not sampled" and is never shown as clean.
+  - Hindi and English brief, copy, print or PDF, WhatsApp share, CSV download, read-aloud (needs a device voice).
+  - Action plan with tickable tasks (before 19 Oct, during 20 Oct, after 27 Oct).
+  - Check a new reading: type DO, BOD and pH and see them against CPCB class B at once.
+  - Before, during and after averages across the ghats, with a Ganesh or Durga filter. This shows a pattern only, not a cause.
+  - Questions tab: answers are built by code from the data. It is not live AI.
+- Does not work yet (and we say so on the page):
+  - Public reports ("Report a ghat") and ticked tasks are saved only in the browser. There is no server, so real delivery to BMC needs a backend. WhatsApp is the route today.
+  - The ranking is relative, not a safe or unsafe verdict. It makes no health claims.
+  - Total coliform is not in the data, so it is not checked.
+  - Units are assumed to be mg/l. "Rani Kamlapati" may refer to two places.
+  - NGT has banned immersion in the Upper and Lower Lakes and BMC is building new ghats, so new ghats have no data here.
+  - No ghat map yet, because locations are not verified.
 
 ## Data used
+- Repo data: the organisers' data pack, https://github.com/Laaaaksh/bhopal-impact-lab-2026 (folder `tracks/02-visarjan-ghat-watch`): 1,524 readings, 7 ghats, MPPCB water-test reports 2023 to 2025.
+- Extra data: none. We used no data beyond the data pack. Limits come from CPCB water quality criteria, class B.
+- Library: qrcode-generator 1.4.4 (MIT), loaded from https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js, used only to draw QR codes.
 
-All data is public and comes from the Bhopal Impact Lab 2026 participant pack. No extra data was added.
+## Privacy and safety
+Public data only. No personal data is collected. No live government system is accessed. No API keys or secrets are in this repo.
 
-- `data/bhopal_ghats_2023_2025.csv`: 1,524 readings at 7 Bhopal ghats, 2023 to 2025 (compiled from the MPPCB reports, with the report page for each reading)
-- `data/cpcb_water_quality_criteria.csv`: CPCB water-quality limits, classes A to E
-- `data/DATA_DICTIONARY.md`: what every column means
-
-Sources:
-- MPPCB Idol Immersion Report 2023: https://www.mppcb.mp.gov.in/proc/mon/Idol_immer._Report_23_CPCB.pdf
-- MPPCB Ganesh and Durga Visarjan Report 2024: https://www.mppcb.mp.gov.in/proc/mon/Ganesh_and_Durga_visarjan_report-2024.pdf
-- MPPCB Ganesh and Durga Visarjan Report 2025: https://www.mppcb.mp.gov.in/proc/mon/Ganesh_and_Durga_visarjan_report-2025.pdf
-- CPCB water quality criteria: https://cpcb.gov.in/water-quality-criteria/
-- Participant pack: https://github.com/Laaaaksh/bhopal-impact-lab-2026
-
-## Rules of the day
-
-Code was written on 11 October 2026 during the event, with Claude. The repo contains no secrets. It does not connect to any government system. Licence: MIT (see `LICENSE`).
+## License
+MIT. See the LICENSE file.
