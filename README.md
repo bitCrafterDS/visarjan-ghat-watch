@@ -20,6 +20,7 @@ Three years of MPPCB water tests at 7 Bhopal immersion ghats sit in PDFs nobody 
 2. **A trace for every number**: charts and a table of every reading, each linked to its page in the MPPCB report.
 3. **A short brief in Hindi and English** that can be copied or printed to PDF and forwarded.
 4. **Honest gaps**: missing readings show as missing (never clean), and each ghat lists what the data does not cover.
+5. 5. **One-tap WhatsApp share and CSV download** of the ranking, so the officer can forward it from a phone.
 
 Headline from the data: DO was below 5 mg/l in 42 of 116 tests, BOD above 3 mg/l in 100 of 112 tests, and Bairagarh kund read 0 mg/l oxygen four times.
 
