@@ -2,10 +2,12 @@
 
 **Claude Impact Lab × Cerebras Café Compute, Bhopal, 11 October 2026 · Track 2**
 
+**Live tool:** https://bitcrafterds.github.io/visarjan-ghat-watch/
+
 | | |
 |---|---|
-| **Team** | `<PromptPirates>` |
-| **Members** | `<Srishty Singh>`, `<Deepanshu Singh>`, `<Kartik Singh>`, |
+| **Team**            | PromptPirates |
+| **Members**         | Srishty Singh, Deepanshu Singh, Kartik Singh |
 | **Track** | Track 2: Visarjan Ghat Watch |
 | **The one user** | The Bhopal Municipal Corporation (BMC) officer who plans Durga visarjan at the ghats |
 | **The one outcome** | Before 20 October 2026, the officer knows which ghats need extra cleaning, aeration and testing first, and can forward a short Hindi and English brief |
