@@ -8,6 +8,7 @@ Writes docs/index.html            (self-contained page, opens offline, can be ho
        output/ghat_risk_ranking.csv
        output/brief_en.txt, output/brief_hi.txt
 """
+import base64
 import csv
 import json
 import os
@@ -22,9 +23,16 @@ TEMPLATE = os.path.join(ROOT, "src", "template.html")
 OUT_HTML = os.path.join(ROOT, "docs", "index.html")
 OUT_DIR = os.path.join(ROOT, "output")
 UPDATES = os.path.join(ROOT, "docs", "updates.json")
+LOGO = os.path.join(ROOT, "docs", "ghatwise-logo.webp")
+FAVICON = os.path.join(ROOT, "docs", "favicon.png")
 
 MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 MONTHS_HI = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
+
+
+def data_uri(path, mime):
+    with open(path, "rb") as fh:
+        return "data:%s;base64,%s" % (mime, base64.b64encode(fh.read()).decode("ascii"))
 
 
 def load_updates():
@@ -118,7 +126,7 @@ def compute():
 
     payload = {
         "meta": {"built": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                 "reports": REPORTS,
+                 "logo": data_uri(LOGO, "image/webp"), "reports": REPORTS,
                  "expected_per_ghat": S.EXPECTED,
                  "p1": S.P1_MIN, "p2": S.P2_MIN},
         "headline": dict(head, bairagarh_do_zero=next(g["m"]["do_zero"] for g in ghats if g["id"].startswith("Bairagarh"))),
@@ -141,7 +149,7 @@ def main():
     with open(TEMPLATE, encoding="utf-8") as fh:
         tpl = fh.read()
     blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-    html = tpl.replace("/*__DATA__*/null", blob)
+    html = tpl.replace("/*__DATA__*/null", blob).replace("__FAVICON__", data_uri(FAVICON, "image/png"))
     with open(OUT_HTML, "w", encoding="utf-8") as fh:
         fh.write(html)
 
