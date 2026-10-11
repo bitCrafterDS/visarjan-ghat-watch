@@ -7,13 +7,13 @@ Event: Claude Impact Lab x Cerebras Cafe Compute, Bhopal, 11 Oct 2026
 Live site: https://bitcrafterds.github.io/visarjan-ghat-watch/
 
 ## The user
-A Bhopal Municipal Corporation (BMC) officer who has to plan ghat arrangements for Durga visarjan on 20 Oct 2026 and needs to know, in a few minutes, which ghats to look at first and why.
+A Bhopal Municipal Corporation (BMC) officer who has to plan ghat arrangements for visarjans, in a few minutes, which ghats to look at first and why.
 
 ## What it does
 GhatWise reads the water tests that MPPCB took at 7 Bhopal ghats in 2023 to 2025 (before, during and one week after immersion) and ranks the ghats by relative risk against the CPCB class B limits (DO 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5). Every ghat card gives the reason in plain words, the readings, and a link to the report and page each number came from. A short Hindi and English brief can be copied, printed, sent on WhatsApp or downloaded as CSV, and an action plan turns each ghat's findings into before, during and after tasks.
 
 ## Demo
-Screen recording (2 min): [ADD LINK HERE]
+Screen recording (2 min): Attached to the google form
 
 ## How to run
 1. Open the live site: https://bitcrafterds.github.io/visarjan-ghat-watch/ (nothing to install).
