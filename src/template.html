@@ -4,183 +4,79 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Visarjan Ghat Watch | Bhopal</title>
-<meta name="description" content="Ranks Bhopal's idol-immersion ghats by water-test risk before Durga visarjan, with the report page behind every number.">
+<meta name="description" content="Ranks Bhopal's visarjan ghats by water-test risk, with the report page behind every number. For BMC officers and the public.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8A%3C/text%3E%3C/svg%3E">
 <style>
-@property --pct { syntax:'<number>'; inherits:false; initial-value:0; }
 :root {
-  --bg:#eef3f4; --card:#ffffff; --ink:#0f1f28; --muted:#53656e; --line:#d9e3e6; --band:#e6eef0;
-  --accent:#0b6f7a; --accent-ink:#ffffff; --bad:#c9302a; --ok:#1f8a5b; --warn:#b87000;
-  --p1:#d1332a; --p2:#c77a00; --p3:#1f8a5b; --soft-bad:#fdeceb; --soft-warn:#fff4de; --soft-ok:#e5f5ec;
-  --shadow:0 1px 2px rgba(8,47,58,.06), 0 8px 24px -8px rgba(8,47,58,.16);
-  --lake1:#06303a; --lake2:#0b5361; --lake3:#117486;
+  --bg:#f6f4ee; --card:#ffffff; --ink:#1c2331; --muted:#5b6475; --line:#e2ded3; --band:#f3f1ea;
+  --accent:#0a6c70; --accent-ink:#ffffff; --bad:#c0392b; --ok:#2b7a57; --warn:#c27c0e;
+  --p1:#c0392b; --p2:#c27c0e; --p3:#2b7a57; --soft-bad:#fbeceb; --soft-warn:#fcf3e1; --soft-ok:#e8f4ee;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg:#09151a; --card:#11222a; --ink:#e6f0f2; --muted:#9fb3ba; --line:#223943; --band:#173039;
-    --accent:#4fd1d9; --accent-ink:#05262a; --bad:#ef7b6f; --ok:#5fc08f; --warn:#e5ad4a;
+    --bg:#12161d; --card:#1b212b; --ink:#e8ebf1; --muted:#a2abbb; --line:#2d3543; --band:#202735;
+    --accent:#4fc1c6; --accent-ink:#0c1a1b; --bad:#ef7b6f; --ok:#5fc08f; --warn:#e5ad4a;
     --p1:#ef7b6f; --p2:#e5ad4a; --p3:#5fc08f; --soft-bad:#33201f; --soft-warn:#33291a; --soft-ok:#1b2d25;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -8px rgba(0,0,0,.6);
   }
 }
 :root[data-theme="dark"] {
-  --bg:#09151a; --card:#11222a; --ink:#e6f0f2; --muted:#9fb3ba; --line:#223943; --band:#173039;
-  --accent:#4fd1d9; --accent-ink:#05262a; --bad:#ef7b6f; --ok:#5fc08f; --warn:#e5ad4a;
+  --bg:#12161d; --card:#1b212b; --ink:#e8ebf1; --muted:#a2abbb; --line:#2d3543; --band:#202735;
+  --accent:#4fc1c6; --accent-ink:#0c1a1b; --bad:#ef7b6f; --ok:#5fc08f; --warn:#e5ad4a;
   --p1:#ef7b6f; --p2:#e5ad4a; --p3:#5fc08f; --soft-bad:#33201f; --soft-warn:#33291a; --soft-ok:#1b2d25;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -8px rgba(0,0,0,.6);
 }
 html { scroll-padding-top:env(safe-area-inset-top,0px); height:100%; }
 * { box-sizing:border-box; }
 body { margin:0; min-height:100%; background:var(--bg); color:var(--ink);
-  font:16px/1.55 "Avenir Next","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Kohinoor Devanagari","Noto Sans","Noto Sans Devanagari","Mangal",Roboto,Arial,sans-serif; }
-:focus-visible { outline:3px solid var(--accent); outline-offset:2px; border-radius:6px; }
-.wrap { max-width:980px; margin:0 auto; padding:0 16px; }
-
-/* ---------- hero ---------- */
-.hero { position:relative; color:#f2fafb; overflow:hidden; padding:40px 0 70px;
-  background:
-    radial-gradient(520px 220px at 88% -10%, rgba(255,179,71,.28), transparent 70%),
-    radial-gradient(700px 320px at 0% 110%, rgba(79,209,217,.22), transparent 70%),
-    linear-gradient(160deg, var(--lake1) 0%, var(--lake2) 58%, var(--lake3) 100%); }
-.hero .wave { position:absolute; left:0; right:0; bottom:-1px; width:100%; height:46px; display:block; }
-.hero .wave path { fill:var(--bg); }
-.hero .wave .back { opacity:.35; }
-.brand { display:flex; align-items:center; gap:10px; font-weight:650; letter-spacing:.01em; }
-.mark { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); }
-.lang { display:inline-flex; padding:3px; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(8px); }
-.lang button { border:0; background:transparent; color:#f2fafb; padding:6px 14px; border-radius:999px; font:inherit; font-size:.9rem; cursor:pointer; }
-.lang button[aria-pressed="true"] { background:#fff; color:var(--lake1); font-weight:650; }
-h1 { font-size:clamp(1.7rem, 4.6vw, 2.6rem); line-height:1.12; margin:0 0 10px; font-weight:750; max-width:20ch; }
-:lang(en) h1 { letter-spacing:-.02em; }
-:lang(hi) h1 { line-height:1.35; }
-.sub { margin:0; max-width:60ch; color:rgba(242,250,251,.82); }
-.countdown { display:inline-flex; align-items:center; gap:9px; margin-top:16px; padding:7px 14px 7px 12px; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); font-size:.92rem; font-weight:600; }
-.countdown i { width:10px; height:10px; border-radius:50%; background:#ffb347; box-shadow:0 0 0 0 rgba(255,179,71,.6); animation:flame 2.4s ease-out infinite; }
-@keyframes flame { 0% { box-shadow:0 0 0 0 rgba(255,179,71,.55); } 70%,100% { box-shadow:0 0 0 10px rgba(255,179,71,0); } }
-.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:22px; }
-.stat { padding:12px 14px; border-radius:16px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); backdrop-filter:blur(8px); }
-.stat b { display:block; font-size:1.75rem; line-height:1.1; font-weight:750; font-variant-numeric:tabular-nums; }
-.stat span { display:block; margin-top:2px; font-size:.82rem; line-height:1.35; color:rgba(242,250,251,.8); }
-
-/* ---------- tabs ---------- */
-.main-wrap { padding-bottom:8px; }
-.hero.compact { padding:34px 0 58px; }
-main.brief, main.method { padding-top:22px; }
-.board { position:relative; z-index:2; margin-top:-40px; }
-
-/* ---------- site header ---------- */
-header.site { position:sticky; top:0; z-index:30; padding-top:env(safe-area-inset-top,0px); color:#f2fafb;
-  background:color-mix(in srgb, var(--lake1) 94%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,.12); }
-header.site .bar { display:flex; align-items:center; gap:14px; min-height:62px; }
-.brand { display:flex; align-items:center; gap:10px; font:inherit; font-weight:700; letter-spacing:.01em; color:inherit; background:transparent; border:0; cursor:pointer; padding:0; text-align:left; }
-.mark { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); }
-nav.tabs { display:flex; gap:2px; margin-left:18px; flex:1; }
-nav.tabs button { border:0; background:transparent; color:rgba(242,250,251,.75); padding:9px 14px; border-radius:999px; font:inherit; font-size:.92rem; cursor:pointer; line-height:1.25; white-space:nowrap; }
-nav.tabs button:hover { color:#fff; background:rgba(255,255,255,.08); }
-nav.tabs button[aria-selected="true"] { background:rgba(255,255,255,.16); color:#fff; font-weight:650; }
-.hdr-right { display:flex; align-items:center; gap:10px; margin-left:auto; }
-.gh { display:inline-flex; align-items:center; gap:7px; color:#f2fafb; text-decoration:none; font-size:.88rem; padding:7px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.22); }
-.gh:hover { background:rgba(255,255,255,.1); }
-.lang { display:inline-flex; padding:3px; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); }
-.lang button { border:0; background:transparent; color:#f2fafb; padding:6px 13px; border-radius:999px; font:inherit; font-size:.9rem; cursor:pointer; }
-.lang button[aria-pressed="true"] { background:#fff; color:var(--lake1); font-weight:650; }
-
-/* ---------- site footer ---------- */
-footer.site { position:relative; margin-top:44px; color:#dcecef; padding:44px 0 22px;
-  background:radial-gradient(520px 240px at 100% 0%, rgba(255,179,71,.14), transparent 70%), linear-gradient(160deg, var(--lake1), var(--lake2)); }
-.foot-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:30px; }
-footer.site h3 { margin:0 0 10px; font-size:.95rem; color:#fff; }
-footer.site p { margin:0 0 10px; font-size:.9rem; line-height:1.6; color:#c9dde1; }
-footer.site a, footer.site .linkbtn { color:#9fe4ea; }
-footer.site ul { list-style:none; margin:0; padding:0; }
-footer.site li { margin:6px 0; font-size:.9rem; }
-.linkbtn { background:transparent; border:0; padding:0; font:inherit; cursor:pointer; text-decoration:underline; text-align:left; }
-.foot-brand { display:flex; align-items:center; gap:10px; font-weight:700; color:#fff; margin-bottom:10px; }
-.foot-note { padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); }
-.foot-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px 16px; margin-top:28px; padding-top:16px; border-top:1px solid rgba(255,255,255,.16); font-size:.82rem; color:#b4cdd2; }
-.foot-bottom button { color:#9fe4ea; }
-
-/* ---------- priority board ---------- */
-.board { background:var(--card); border:1px solid var(--line); border-radius:22px; padding:16px 16px 12px; box-shadow:var(--shadow); }
-.board-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 12px; margin-bottom:6px; }
-.board-head h2 { margin:0; font-size:1.1rem; }
-.brow { display:grid; grid-template-columns:1.7rem minmax(0,1.25fr) minmax(0,2fr) 2.3rem; align-items:center; gap:10px; width:100%;
-  border:0; background:transparent; color:inherit; font:inherit; text-align:left; padding:7px 6px; border-radius:12px; cursor:pointer; }
-button.brow:hover { background:var(--band); }
-.brow.axis { padding-top:0; padding-bottom:0; cursor:default; }
-.axis-track { position:relative; height:16px; }
-.axis-track em { position:absolute; transform:translateX(-50%); font-style:normal; font-size:.72rem; color:var(--muted); }
-.bn { width:1.7rem; height:1.7rem; border-radius:50%; display:grid; place-items:center; font-size:.85rem; font-weight:700; background:var(--band); color:var(--ink); }
-.brow.p1 .bn { background:var(--p1); color:#fff; }
-.bname { font-weight:600; font-size:.95rem; line-height:1.3; }
-.btrack { position:relative; height:12px; border-radius:7px; background:var(--band); overflow:hidden; }
-.btrack i { position:absolute; left:0; top:0; bottom:0; border-radius:7px; background:var(--p3); transform-origin:left; animation:grow .8s cubic-bezier(.2,.7,.2,1) both; }
-.brow.p1 .btrack i { background:var(--p1); } .brow.p2 .btrack i { background:var(--p2); }
-.btrack b { position:absolute; top:0; bottom:0; width:2px; background:var(--card); opacity:.9; }
-@keyframes grow { from { transform:scaleX(0); } }
-.bscore { font-weight:750; text-align:right; font-variant-numeric:tabular-nums; }
-
-/* ---------- notice, view switch, legend ---------- */
-.banner { display:flex; gap:10px; align-items:flex-start; background:var(--soft-warn); border:1px solid var(--line); border-radius:14px; padding:11px 14px; margin:14px 0; font-size:.92rem; }
-.banner::before { content:"i"; flex:none; width:20px; height:20px; margin-top:1px; border-radius:50%; display:grid; place-items:center; background:var(--warn); color:#fff; font-weight:700; font-size:.8rem; font-style:italic; font-family:Georgia,serif; }
+  font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans","Noto Sans Devanagari","Mangal",Roboto,Arial,sans-serif; }
+.wrap { max-width:920px; margin:0 auto; padding:16px; }
+header { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:8px; }
+h1 { font-size:1.6rem; line-height:1.2; margin:0 0 4px; }
+.sub { color:var(--muted); margin:0; max-width:620px; }
+.lang { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--card); }
+.lang button { border:0; background:transparent; color:var(--ink); padding:6px 14px; font:inherit; cursor:pointer; }
+.lang button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); }
+.countdown { display:inline-block; margin-top:8px; padding:4px 12px; border-radius:999px; background:var(--soft-warn); color:var(--ink); font-size:.9rem; border:1px solid var(--line); }
+nav.tabs { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; border-bottom:1px solid var(--line); }
+nav.tabs button { border:0; background:transparent; color:var(--muted); padding:10px 14px; font:inherit; cursor:pointer; border-bottom:3px solid transparent; }
+nav.tabs button[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--accent); font-weight:600; }
+.banner { background:var(--soft-warn); border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin-bottom:14px; font-size:.95rem; }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:14px; }
+.stat { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+.stat b { display:block; font-size:1.8rem; line-height:1.1; color:var(--bad); }
+.stat span { color:var(--muted); font-size:.9rem; }
 .basis { margin:10px 0 4px; }
-.basis .label { font-size:.85rem; color:var(--muted); margin-bottom:6px; display:block; }
+.basis .label { font-size:.85rem; color:var(--muted); margin-bottom:4px; display:block; }
 .seg { display:flex; flex-wrap:wrap; gap:6px; }
-.seg button { border:1px solid var(--line); background:var(--card); color:var(--ink); padding:8px 14px; border-radius:999px; font:inherit; font-size:.9rem; cursor:pointer; }
-.seg button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600; }
-.basis-desc { font-size:.85rem; color:var(--muted); margin:8px 0 12px; max-width:70ch; }
-.legend { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:6px 0 16px; font-size:.85rem; color:var(--muted); }
-.chip { display:inline-block; padding:2px 11px; border-radius:999px; border:1px solid var(--line); background:var(--card); }
-.chip.p1 { border-color:var(--p1); color:var(--p1); } .chip.p2 { border-color:var(--p2); color:var(--ink); } .chip.p3 { border-color:var(--p3); color:var(--ink); }
-
-/* ---------- ghat cards ---------- */
-.card { position:relative; scroll-margin-top:120px; background:var(--card); border:1px solid var(--line); border-radius:22px; padding:18px 18px 16px; margin-bottom:16px; box-shadow:var(--shadow); overflow:hidden; }
-.card::before { content:""; position:absolute; left:0; right:0; top:0; height:5px; background:var(--p3); }
-.card.p1::before { background:var(--p1); } .card.p2::before { background:var(--p2); }
-.card.p1 { background:linear-gradient(180deg, var(--soft-bad) 0, var(--card) 170px); }
-.card.flash { animation:flash 1.4s ease-out; }
-@keyframes flash { 0% { box-shadow:0 0 0 4px var(--accent); } 100% { box-shadow:var(--shadow); } }
-.card-top { display:flex; gap:14px; align-items:center; }
-.rankno { font-size:2.5rem; font-weight:800; line-height:1; letter-spacing:-.03em; color:var(--muted); min-width:2.6rem; font-variant-numeric:tabular-nums; }
-.rankno small { font-size:1rem; font-weight:700; margin-right:1px; vertical-align:top; position:relative; top:.35rem; }
-.card.p1 .rankno { color:var(--p1); }
+.seg button { border:1px solid var(--line); background:var(--card); color:var(--ink); padding:7px 12px; border-radius:999px; font:inherit; font-size:.9rem; cursor:pointer; }
+.seg button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.basis-desc { font-size:.85rem; color:var(--muted); margin:6px 0 12px; }
+.legend { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 14px; font-size:.85rem; }
+.chip { display:inline-block; padding:2px 10px; border-radius:999px; border:1px solid var(--line); background:var(--card); }
+.chip.p1 { border-color:var(--p1); color:var(--p1); } .chip.p2 { border-color:var(--p2); color:var(--p2); } .chip.p3 { border-color:var(--p3); color:var(--p3); }
+.card { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+.card.p1 { border-left-color:var(--p1); } .card.p2 { border-left-color:var(--p2); } .card.p3 { border-left-color:var(--p3); }
+.card-top { display:flex; gap:12px; align-items:flex-start; }
+.rank { font-size:1.9rem; font-weight:700; line-height:1; min-width:2.2rem; color:var(--muted); }
 .card-main { flex:1; min-width:0; }
-.card h2 { font-size:1.2rem; margin:0; line-height:1.3; }
+.card h2 { font-size:1.15rem; margin:0; line-height:1.3; }
 .body-name { color:var(--muted); font-size:.9rem; }
-.ring { --c:var(--p3); --size:78px; position:relative; flex:none; width:var(--size); height:var(--size); border-radius:50%; display:grid; place-items:center;
-  background:conic-gradient(var(--c) calc(var(--pct) * 1%), var(--band) 0); animation:ringfill 1s cubic-bezier(.2,.7,.2,1) both; }
-.ring::before { content:""; position:absolute; inset:8px; border-radius:50%; background:var(--card); }
-.card.p1 .ring::before { background:color-mix(in srgb, var(--soft-bad) 55%, var(--card)); }
-.card.p1 .ring { --c:var(--p1); } .card.p2 .ring { --c:var(--p2); }
-.ring span { position:relative; text-align:center; line-height:1; }
-.ring b { display:block; font-size:1.45rem; font-weight:800; font-variant-numeric:tabular-nums; }
-.ring small { font-size:.62rem; color:var(--muted); }
-.ring .nd { font-size:.7rem; color:var(--muted); font-weight:600; padding:0 6px; display:block; }
-@keyframes ringfill { from { --pct:0; } }
-.badges { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 4px; }
-.badge { font-size:.8rem; padding:3px 11px; border-radius:999px; border:1px solid var(--line); background:var(--band); }
-.badge.p1 { background:var(--p1); border-color:var(--p1); color:#fff; font-weight:650; }
-.badge.p2 { background:var(--soft-warn); border-color:var(--p2); color:var(--ink); font-weight:650; }
-.badge.p3 { background:var(--soft-ok); border-color:var(--p3); color:var(--ink); font-weight:650; }
+.badges { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+.badge { font-size:.8rem; padding:2px 10px; border-radius:999px; border:1px solid var(--line); background:var(--band); }
+.badge.p1 { background:var(--soft-bad); border-color:var(--p1); color:var(--p1); font-weight:600; }
+.badge.p2 { background:var(--soft-warn); border-color:var(--p2); color:var(--ink); font-weight:600; }
+.badge.p3 { background:var(--soft-ok); border-color:var(--p3); color:var(--ink); font-weight:600; }
 .badge.low { background:var(--soft-warn); border-color:var(--warn); }
-.used { margin:4px 0 2px; }
-.cols { display:grid; grid-template-columns:1fr; gap:0 24px; }
-@media (min-width:760px) { .cols { grid-template-columns:1fr 1fr; } }
-.sec { margin:12px 0 4px; font-weight:650; font-size:.92rem; color:var(--ink); }
-ul { margin:4px 0 8px; padding-left:20px; } li { margin:4px 0; }
-ul.todo { list-style:none; padding-left:0; }
-ul.todo li { position:relative; padding-left:28px; }
-ul.todo li::before { content:""; position:absolute; left:2px; top:.28em; width:15px; height:15px; border-radius:5px; border:2px solid var(--accent); }
-details { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
-summary { cursor:pointer; color:var(--accent); font-weight:650; list-style:none; display:flex; align-items:center; gap:8px; }
-summary::-webkit-details-marker { display:none; }
-summary::after { content:""; width:8px; height:8px; margin-left:2px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); transition:transform .2s; }
-details[open] > summary::after { transform:rotate(-135deg); }
-
-/* ---------- charts and tables (unchanged classes) ---------- */
-.chart-title { font-size:.9rem; font-weight:650; margin:14px 0 2px; }
+.scorerow { display:flex; align-items:center; gap:10px; margin:6px 0; font-size:.9rem; }
+.bar { flex:1; height:10px; background:var(--band); border-radius:6px; overflow:hidden; border:1px solid var(--line); }
+.bar span { display:block; height:100%; background:var(--p3); }
+.card.p1 .bar span { background:var(--p1); } .card.p2 .bar span { background:var(--p2); }
+.scorenum { font-weight:700; min-width:3.2rem; text-align:right; }
+.sec { margin:10px 0 2px; font-weight:600; font-size:.9rem; color:var(--muted); text-transform:none; }
+ul { margin:4px 0 8px; padding-left:20px; } li { margin:3px 0; }
+details { margin-top:10px; border-top:1px dashed var(--line); padding-top:8px; }
+summary { cursor:pointer; color:var(--accent); font-weight:600; }
+.chart-title { font-size:.9rem; font-weight:600; margin:12px 0 2px; }
 svg.chart { width:100%; height:auto; display:block; background:var(--card); }
 svg.chart text { fill:var(--muted); font-size:10px; font-family:inherit; }
 svg.chart .lim { stroke:var(--bad); stroke-width:1; stroke-dasharray:4 3; opacity:.8; }
@@ -194,53 +90,43 @@ svg.chart text.tick { text-anchor:end; } svg.chart text.limtick { fill:var(--bad
 .keyrow { display:flex; flex-wrap:wrap; gap:12px; font-size:.8rem; color:var(--muted); margin:6px 0; align-items:center; }
 .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:middle; }
 .dot.ok { background:var(--ok); } .dot.bad { background:var(--bad); }
-.tablewrap { overflow-x:auto; max-width:100%; border:1px solid var(--line); border-radius:12px; }
+.tablewrap { overflow-x:auto; max-width:100%; }
 table { border-collapse:collapse; width:100%; font-size:.85rem; }
-th, td { border-bottom:1px solid var(--line); padding:6px 10px; text-align:left; white-space:nowrap; }
-th { color:var(--muted); font-weight:650; background:var(--band); }
+th, td { border-bottom:1px solid var(--line); padding:5px 8px; text-align:left; white-space:nowrap; }
+th { color:var(--muted); font-weight:600; }
 td.num { text-align:right; font-variant-numeric:tabular-nums; }
 td.bad { color:var(--bad); font-weight:700; } td.missing { color:var(--muted); }
 tr.noevent td { color:var(--muted); font-style:italic; }
 a { color:var(--accent); }
 .note { font-size:.85rem; color:var(--muted); }
-
-/* ---------- brief and method ---------- */
-.actions { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
-.actions button { padding:10px 18px; border-radius:12px; font:inherit; font-size:.92rem; cursor:pointer; }
-button.primary { background:var(--accent); color:var(--accent-ink); border:0; font-weight:650; }
-button.wa { background:#1fa855; color:#fff; border:0; font-weight:650; }
-button.ghost { background:var(--card); color:var(--ink); border:1px solid var(--line); }
-pre.brief { white-space:pre-wrap; word-wrap:break-word; font:inherit; font-size:.95rem; background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 22px; line-height:1.7; box-shadow:var(--shadow); max-width:78ch; }
-.method { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:6px 22px 18px; box-shadow:var(--shadow); max-width:78ch; }
-.method h2 { font-size:1.08rem; margin:20px 0 4px; padding-left:12px; border-left:4px solid var(--accent); }
+pre.brief { white-space:pre-wrap; word-wrap:break-word; font:inherit; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; line-height:1.55; }
+.actions { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+button.primary { background:var(--accent); color:var(--accent-ink); border:0; padding:9px 16px; border-radius:8px; font:inherit; cursor:pointer; }
+button.ghost { background:var(--card); color:var(--ink); border:1px solid var(--line); padding:9px 16px; border-radius:8px; font:inherit; cursor:pointer; }
+.method h2 { font-size:1.1rem; margin:20px 0 4px; }
 .method p { margin:4px 0; }
-
-@media (max-width:560px) {
-  header.site .bar { flex-wrap:wrap; min-height:0; padding-top:8px; padding-bottom:8px; row-gap:6px; }
-  .gh { display:none; }
-  nav.tabs { order:3; width:100%; margin-left:0; flex:none; overflow-x:auto; gap:4px; padding-bottom:2px; }
-  nav.tabs button { flex:1; font-size:.84rem; padding:8px 8px; }
-  .foot-grid { grid-template-columns:1fr; gap:22px; }
-  .board { margin-top:-34px; }
-  .brow { grid-template-columns:1.7rem minmax(0,1fr) 2.3rem; row-gap:6px; }
-  .brow .btrack { grid-column:2 / 4; grid-row:2; }
-  .brow.axis .axis-track { grid-column:2 / 4; }
-  .brow.axis > span:first-child, .brow.axis > span:nth-child(2), .brow.axis > span:last-child { display:none; }
-  .stats { grid-template-columns:1fr; }
-  .stat { display:flex; align-items:center; gap:14px; padding:10px 14px; }
-  .stat b { font-size:1.5rem; min-width:6.4rem; }
-  .stat span { margin:0; flex:1; text-align:left; font-size:.8rem; }
-  .rankno { font-size:2rem; min-width:2.1rem; }
-  .ring { --size:64px; } .ring b { font-size:1.2rem; } .ring::before { inset:7px; }
-  .card { padding:16px 14px 14px; }
-}
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+.hero h2 { font-size:1.35rem; line-height:1.3; margin:6px 0; }
+.hero p { margin:4px 0 12px; color:var(--muted); }
+.aud { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin:12px 0 18px; }
+.audcard { background:var(--card); border:1px solid var(--line); border-top:5px solid var(--accent); border-radius:12px; padding:14px 16px; }
+.audcard.pub { border-top-color:#c8552a; }
+.audcard h3 { margin:0 0 4px; font-size:1.05rem; }
+.audcard p { margin:4px 0 10px; font-size:.95rem; color:var(--muted); }
+.h2 { font-size:1.1rem; margin:22px 0 8px; }
+.vis { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; }
+.viscard { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+.viscard.next { border-color:var(--accent); box-shadow:0 0 0 2px var(--soft-ok); }
+.viscard .vname { font-weight:700; }
+.viscard .vdate, .upd .ud { color:var(--muted); font-size:.85rem; }
+.viscard .vleft { font-size:1.3rem; font-weight:700; color:var(--accent); margin:4px 0; }
+.upd { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 14px; margin-bottom:8px; }
+.upd b { display:block; }
+ol.first { padding-left:22px; margin:6px 0; } ol.first li { margin:8px 0; }
+footer { margin:24px 0 8px; color:var(--muted); font-size:.82rem; }
+@media (max-width:520px) { .wrap { padding:12px; } h1 { font-size:1.35rem; } .rank { font-size:1.5rem; min-width:1.8rem; } }
 @media print {
-  .hero { background:none; color:#000; padding:0 0 8px; overflow:visible; }
-  header.site, footer.site, .hero .wave, .hero .stats, .hero .countdown, .board, .actions, .banner { display:none !important; }
-  .sub { color:#333; } h1 { max-width:none; }
-  body { background:#fff; color:#000; }
-  pre.brief, .method, .card { border:0; box-shadow:none; padding:0; background:none; }
+  header .lang, nav.tabs, .actions, .banner, footer { display:none !important; }
+  body { background:#fff; color:#000; } pre.brief { border:0; padding:0; }
 }
 </style>
 </head>
@@ -252,7 +138,7 @@ pre.brief { white-space:pre-wrap; word-wrap:break-word; font:inherit; font-size:
     </pattern>
   </defs>
 </svg>
-<div id="app"></div>
+<div class="wrap" id="app"></div>
 
 <script>
 const D = /*__DATA__*/null;
@@ -261,16 +147,34 @@ const D = /*__DATA__*/null;
 const UI = {
   en: {
     title: 'Visarjan Ghat Watch',
-    hero: 'Which Bhopal ghats need attention first?',
-    board: 'Priority board', board_hint: 'Tap a ghat to jump to its card. The two lines mark scores 25 and 40.',
-    sub: 'Before Durga visarjan: three years of MPPCB water tests at 7 ghats, compared with CPCB limits, with the report page behind every number.',
-    tab_rank: 'Ranking', tab_brief: 'Brief to forward', tab_method: 'Method and limits',
-    method_sub: 'How the score is built, and what the data cannot say.',
-    f_about: 'Ranks the 7 Bhopal ghats that have MPPCB test data by relative water-test risk, so the BMC officer knows where to act first before Durga visarjan on 20 October 2026.',
-    f_limits: 'A relative ranking, not a safe or unsafe verdict. No health claims. Missing data is shown as missing, never as clean.',
-    f_team: 'Team', f_event: 'Claude Impact Lab × Cerebras Café Compute, Bhopal. Track 2: Visarjan Ghat Watch.',
-    f_pages: 'Pages', f_sources: 'Data sources', f_code: 'Source code on GitHub', f_cpcb: 'CPCB water quality criteria',
-    f_pack: 'Participant data pack', f_lic: 'MIT licence · public data only · no keys, no logins', f_top: 'Back to top', f_gh: 'GitHub',
+    sub: 'Which Bhopal ghats to look at first before a visarjan, and why. Built from MPPCB water tests, for BMC officers and for the public.',
+    tab_home: 'Home', tab_rank: 'Ranking', tab_public: 'For the public', tab_brief: 'Brief to forward', tab_method: 'Method and limits',
+    home_hero_h: 'Which ghats to look at first, and why, in a few minutes.',
+    home_hero_p: "Visarjan Ghat Watch lines up three years of MPPCB water tests at Bhopal's visarjan ghats against the national bathing-water limits. Every number links to its page in the report.",
+    aud_officer_h: 'For BMC officers', aud_officer_p: 'Planning ghat arrangements for a visarjan? See which ghats to look at first and why, then forward a short brief in Hindi and English.',
+    aud_officer_btn: 'See the ranking', aud_officer_btn2: 'Open the brief',
+    aud_public_h: 'For the public', aud_public_p: 'See what past water tests at each ghat showed, when the next visarjans are, and the latest ghat updates. In plain words.',
+    aud_public_btn: 'Read the public guide',
+    up_h: 'Upcoming visarjans', up_next: 'Next', up_days: '{n} days to go', up_tomorrow: 'Tomorrow', up_today: 'Today', up_src: 'Date source',
+    up_note: 'Dates follow the panchang and can differ slightly by place. Confirm with BMC notices.',
+    up_none: 'No upcoming visarjan is listed. Add one in updates.json.',
+    upd_h: 'Ghat updates', upd_none: 'No updates yet.', upd_link: 'Read more',
+    first_h: 'Look at these first', first_p: 'Ranked by relative risk against CPCB class B limits (default view).', first_all: 'See all 7 ghats and the reasons',
+    pub_h: 'Public guide: what the water tests showed',
+    pub_intro: "MPPCB tests the water at Bhopal's visarjan ghats before, during and one week after immersion. This page shows what those tests found in 2023 to 2025, in plain words.",
+    pub_what_h: 'What the three numbers mean',
+    pub_what: ['Dissolved oxygen (DO): the oxygen in the water, which fish need. For outdoor bathing water the limit is 5 mg/l or more.',
+               'BOD: how much organic waste is using up the oxygen. The limit for outdoor bathing water is 3 mg/l or less.',
+               'pH: how acidic or alkaline the water is. The limit is 6.5 to 8.5.'],
+    pub_table_h: 'Past test results by ghat',
+    pub_col_ghat: 'Ghat', pub_col_body: 'Water body', pub_col_do: 'DO below limit', pub_col_bod: 'BOD above limit', pub_col_open: 'Readings',
+    pub_tests: '{a} of {b} tests', pub_open: 'See readings',
+    pub_note_h: 'Please note',
+    pub_notes: ["These are past readings (2023 to 2025). They are not today's water and not a forecast.",
+                'This tool does not say whether a ghat is safe or unsafe, and it makes no health claims. It only compares readings with the limits.',
+                'A blank in the MPPCB reports means the water was not sampled. It does not mean the water was clean.',
+                'New ghats built by BMC have no readings yet.',
+                'At the ghat, follow the instructions of BMC and the local administration.'],
     days: '{n} days to Durga visarjan (20 Oct 2026)', today: 'Durga visarjan is today (20 Oct 2026)',
     banner: 'This is a relative ranking of the 7 ghats that have MPPCB test data. It is not a safe or unsafe verdict and says nothing about health. A blank reading is shown as missing, never as clean.',
     h_do: 'DO readings below 5 mg/l', h_bod: 'BOD readings above 3 mg/l', h_zero: 'DO readings of 0 mg/l at Bairagarh kund',
@@ -281,30 +185,48 @@ const UI = {
     score: 'Risk score', conf: 'Data confidence', High: 'High', Medium: 'Medium', Low: 'Low',
     used: '{a} readings used (of {b} possible)',
     same_rank: 'Rank #{a} in every view', range_rank: 'Rank #{a} to #{b} across views',
-    why: 'Why this rank', todo: 'Suggested before 20 October', details: 'Show charts, readings and report pages',
+    why: 'Why this rank', todo: 'Suggested before the next visarjan', details: 'Show charts, readings and report pages',
     gaps: 'Data gaps (missing, not clean)', nogaps: 'No gaps in the scored readings.',
     charts_note: 'Each block is one festival. Its dots go left to right: before, during, one week after immersion. Dashed red line = CPCB class B limit.',
     leg_ok: 'within limit', leg_bad: 'beyond limit', leg_miss: 'not sampled', leg_none: 'no table in report',
     chart_do: 'Dissolved oxygen (mg/l), limit: 5 or more', chart_bod: 'BOD (mg/l), limit: 3 or less', chart_ph: 'pH, limit: 6.5 to 8.5',
     table: 'All scored readings with report page', col_event: 'Festival', col_phase: 'When', col_page: 'Report page',
     sources: 'Source reports', page: 'p.', no_table: 'No table in the MPPCB report',
-    copy: 'Copy brief', copy_both: 'Copy English and Hindi', copied: 'Copied', print: 'Print or save as PDF', wa: 'Send short version on WhatsApp', csv: 'Download ranking (CSV)',
+    copy: 'Copy brief', copy_both: 'Copy English and Hindi', copied: 'Copied', print: 'Print or save as PDF',
     brief_note: 'Generated from the default ranking view. Every number comes straight from the readings.',
     built: 'Built {d}. Open source (MIT). Data: MPPCB reports 2023 to 2025 and CPCB water-quality criteria.',
     nodata: 'no data'
   },
   hi: {
     title: 'विसर्जन घाट वॉच',
-    hero: 'भोपाल के किन घाटों पर सबसे पहले ध्यान देना है?',
-    board: 'प्राथमिकता बोर्ड', board_hint: 'घाट पर टैप करें, उसका कार्ड खुलेगा। दो रेखाएँ अंक 25 और 40 दिखाती हैं।',
-    sub: 'दुर्गा विसर्जन से पहले: 7 घाटों की MPPCB की तीन वर्षों की जल-जाँच, CPCB मानकों से तुलना, और हर संख्या के पीछे रिपोर्ट का पेज।',
-    tab_rank: 'क्रम सूची', tab_brief: 'आगे भेजने के लिए रिपोर्ट', tab_method: 'तरीका और सीमाएँ',
-    method_sub: 'अंक कैसे बनता है, और डेटा क्या नहीं बता सकता।',
-    f_about: 'MPPCB जाँच-डेटा वाले भोपाल के 7 घाटों को जल-जाँच के सापेक्ष जोखिम के क्रम में रखता है, ताकि 20 अक्टूबर 2026 के दुर्गा विसर्जन से पहले नगर निगम अधिकारी को पता रहे कि पहले कहाँ कार्रवाई करनी है।',
-    f_limits: 'यह सापेक्ष क्रम है, सुरक्षित या असुरक्षित का फ़ैसला नहीं। स्वास्थ्य पर कोई दावा नहीं। जो डेटा नहीं है वह "डेटा नहीं" दिखता है, "साफ़" नहीं।',
-    f_team: 'टीम', f_event: 'Claude Impact Lab × Cerebras Café Compute, भोपाल। ट्रैक 2: विसर्जन घाट वॉच।',
-    f_pages: 'पेज', f_sources: 'डेटा स्रोत', f_code: 'GitHub पर सोर्स कोड', f_cpcb: 'CPCB जल-गुणवत्ता मानक',
-    f_pack: 'प्रतिभागी डेटा पैक', f_lic: 'MIT लाइसेंस · केवल सार्वजनिक डेटा · कोई कुंजी या लॉगिन नहीं', f_top: 'ऊपर जाएँ', f_gh: 'GitHub',
+    sub: 'विसर्जन से पहले भोपाल के किन घाटों को सबसे पहले देखना है, और क्यों। MPPCB की जल-जाँच पर आधारित, नगर निगम अधिकारियों और आम जनता दोनों के लिए।',
+    tab_home: 'मुख्य पृष्ठ', tab_rank: 'क्रम सूची', tab_public: 'आम जनता के लिए', tab_brief: 'आगे भेजने के लिए रिपोर्ट', tab_method: 'तरीका और सीमाएँ',
+    home_hero_h: 'किन घाटों को पहले देखना है, और क्यों, कुछ ही मिनटों में।',
+    home_hero_p: 'विसर्जन घाट वॉच भोपाल के विसर्जन घाटों पर MPPCB की तीन वर्षों की जल-जाँच को राष्ट्रीय स्नान-जल मानकों से मिलाता है। हर संख्या रिपोर्ट के अपने पेज से जुड़ी है।',
+    aud_officer_h: 'नगर निगम अधिकारियों के लिए', aud_officer_p: 'विसर्जन के लिए घाटों की व्यवस्था की योजना बना रहे हैं? देखें कि किन घाटों को पहले देखना है और क्यों, फिर हिंदी और अंग्रेज़ी में छोटी रिपोर्ट आगे भेजें।',
+    aud_officer_btn: 'क्रम सूची देखें', aud_officer_btn2: 'रिपोर्ट खोलें',
+    aud_public_h: 'आम जनता के लिए', aud_public_p: 'देखें कि हर घाट पर पिछली जल-जाँच में क्या मिला, अगले विसर्जन कब हैं, और घाटों की ताज़ा जानकारी। सरल भाषा में।',
+    aud_public_btn: 'जनता की गाइड पढ़ें',
+    up_h: 'आने वाले विसर्जन', up_next: 'अगला', up_days: '{n} दिन बाकी', up_tomorrow: 'कल', up_today: 'आज', up_src: 'तिथि का स्रोत',
+    up_note: 'तिथियाँ पंचांग के अनुसार हैं और स्थान के हिसाब से थोड़ी भिन्न हो सकती हैं। नगर निगम की सूचना से पुष्टि करें।',
+    up_none: 'कोई आने वाला विसर्जन सूचीबद्ध नहीं है। updates.json में जोड़ें।',
+    upd_h: 'घाटों की जानकारी', upd_none: 'अभी कोई जानकारी नहीं।', upd_link: 'और पढ़ें',
+    first_h: 'इन्हें सबसे पहले देखें', first_p: 'CPCB श्रेणी-B मानकों के मुकाबले सापेक्ष जोखिम के क्रम में (डिफ़ॉल्ट दृष्टिकोण)।', first_all: 'सभी 7 घाट और कारण देखें',
+    pub_h: 'जनता की गाइड: जल-जाँच में क्या मिला',
+    pub_intro: 'MPPCB भोपाल के विसर्जन घाटों पर विसर्जन से पहले, दौरान और एक सप्ताह बाद पानी की जाँच करता है। यह पृष्ठ सरल भाषा में बताता है कि 2023 से 2025 की जाँच में क्या मिला।',
+    pub_what_h: 'तीन संख्याओं का मतलब',
+    pub_what: ['घुली ऑक्सीजन (DO): पानी में मौजूद ऑक्सीजन, जो मछलियों को चाहिए। खुले में स्नान के पानी के लिए सीमा 5 mg/l या अधिक है।',
+               'BOD: जैविक कचरा पानी की कितनी ऑक्सीजन खा रहा है। खुले में स्नान के पानी के लिए सीमा 3 mg/l या कम है।',
+               'pH: पानी कितना अम्लीय या क्षारीय है। सीमा 6.5 से 8.5 है।'],
+    pub_table_h: 'घाट के अनुसार पिछली जाँच के नतीजे',
+    pub_col_ghat: 'घाट', pub_col_body: 'जल स्रोत', pub_col_do: 'DO सीमा से कम', pub_col_bod: 'BOD सीमा से अधिक', pub_col_open: 'आँकड़े',
+    pub_tests: '{b} में से {a} जाँच', pub_open: 'आँकड़े देखें',
+    pub_note_h: 'कृपया ध्यान दें',
+    pub_notes: ['ये पिछले आँकड़े हैं (2023 से 2025)। ये आज के पानी की स्थिति या आगे का पूर्वानुमान नहीं हैं।',
+                'यह टूल नहीं बताता कि कोई घाट सुरक्षित है या असुरक्षित, और स्वास्थ्य पर असर का कोई दावा नहीं करता। यह केवल आँकड़ों को मानकों से मिलाता है।',
+                'MPPCB रिपोर्ट में खाली जगह का मतलब है कि पानी की जाँच नहीं हुई। इसका मतलब यह नहीं कि पानी साफ़ था।',
+                'नगर निगम के बनाए नए घाटों के आँकड़े अभी नहीं हैं।',
+                'घाट पर नगर निगम और स्थानीय प्रशासन के निर्देशों का पालन करें।'],
     days: 'दुर्गा विसर्जन (20 अक्टूबर 2026) में {n} दिन बाकी', today: 'आज दुर्गा विसर्जन है (20 अक्टूबर 2026)',
     banner: 'यह MPPCB जाँच-डेटा वाले 7 घाटों का सापेक्ष क्रम है। यह सुरक्षित या असुरक्षित का फ़ैसला नहीं है और स्वास्थ्य के बारे में कुछ नहीं कहता। खाली आँकड़ा "डेटा नहीं" दिखाया गया है, "साफ़" नहीं।',
     h_do: 'DO जाँच 5 mg/l से कम', h_bod: 'BOD जाँच 3 mg/l से अधिक', h_zero: 'बैरागढ़ कुंड पर DO = 0 mg/l की जाँचें',
@@ -315,14 +237,14 @@ const UI = {
     score: 'जोखिम अंक', conf: 'डेटा की विश्वसनीयता', High: 'उच्च', Medium: 'मध्यम', Low: 'कम',
     used: '{a} जाँच इस्तेमाल हुईं (कुल संभव {b})',
     same_rank: 'हर दृष्टिकोण में क्रम #{a}', range_rank: 'दृष्टिकोणों में क्रम #{a} से #{b}',
-    why: 'यह क्रम क्यों', todo: '20 अक्टूबर से पहले सुझाव', details: 'ग्राफ़, जाँच-आँकड़े और रिपोर्ट के पेज देखें',
+    why: 'यह क्रम क्यों', todo: 'अगले विसर्जन से पहले सुझाव', details: 'ग्राफ़, जाँच-आँकड़े और रिपोर्ट के पेज देखें',
     gaps: 'डेटा की कमियाँ (खाली मतलब साफ़ नहीं)', nogaps: 'अंक वाली जाँचों में कोई कमी नहीं।',
     charts_note: 'हर खंड एक त्योहार है। उसके बिंदु बाएँ से दाएँ: विसर्जन से पहले, दौरान, एक सप्ताह बाद। लाल बिंदीदार रेखा = CPCB श्रेणी-B की सीमा।',
     leg_ok: 'सीमा के भीतर', leg_bad: 'सीमा से बाहर', leg_miss: 'जाँच नहीं हुई', leg_none: 'रिपोर्ट में तालिका नहीं',
     chart_do: 'घुली ऑक्सीजन (mg/l), सीमा: 5 या अधिक', chart_bod: 'BOD (mg/l), सीमा: 3 या कम', chart_ph: 'pH, सीमा: 6.5 से 8.5',
     table: 'अंक वाली सभी जाँचें, रिपोर्ट पेज सहित', col_event: 'त्योहार', col_phase: 'कब', col_page: 'रिपोर्ट पेज',
     sources: 'स्रोत रिपोर्टें', page: 'पेज', no_table: 'MPPCB रिपोर्ट में तालिका नहीं',
-    copy: 'रिपोर्ट कॉपी करें', copy_both: 'अंग्रेज़ी और हिंदी दोनों कॉपी करें', copied: 'कॉपी हो गया', print: 'प्रिंट या PDF सहेजें', wa: 'WhatsApp पर छोटा संदेश भेजें', csv: 'क्रम सूची डाउनलोड करें (CSV)',
+    copy: 'रिपोर्ट कॉपी करें', copy_both: 'अंग्रेज़ी और हिंदी दोनों कॉपी करें', copied: 'कॉपी हो गया', print: 'प्रिंट या PDF सहेजें',
     brief_note: 'डिफ़ॉल्ट क्रम से बनी। हर संख्या सीधे जाँच-आँकड़ों से ली गई है।',
     built: 'बनाया गया {d}। ओपन सोर्स (MIT)। डेटा: MPPCB रिपोर्टें 2023 से 2025 और CPCB जल-गुणवत्ता मानक।',
     nodata: 'डेटा नहीं'
@@ -344,7 +266,7 @@ const METHOD = {
       'The reports print no units. Standard units are assumed (mg/l, NTU, µS/cm). BDL means below detection limit: very low, not zero, not missing.',
       'A blank, "-", "*" or "**" means not sampled. Bairagarh kund and Malikhedi kund have no Durga 2025 table, and their Ganesh 2025 tests cover only the during-immersion stage.',
       '"Rani Kamlapati ghat / Kamla Park kund" may cover two places (Ganesh tables say Kamla Park kund, Durga tables say Lower Lake ghat).',
-      'The NGT has banned immersion in the Upper and Lower Lakes and BMC is building new ghats. New ghats have no readings here, so this tool cannot rank them. Which ghats are used on 20 October is for BMC to confirm.',
+      'The NGT has banned immersion in the Upper and Lower Lakes and BMC is building new ghats. New ghats have no readings here, so this tool cannot rank them. Which ghats are used at each visarjan is for BMC to confirm.',
       'The tool reports readings against limits. It does not claim any health effect.'] },
     { h: 'Data and sources', p: ['MPPCB Ganesh and Durga Visarjan reports 2023, 2024 and 2025, as compiled in the Bhopal Impact Lab 2026 participant pack (1,524 readings), and CPCB water-quality criteria. Source links are in the card details and in the README.'] }
   ],
@@ -362,7 +284,7 @@ const METHOD = {
       'रिपोर्ट में इकाइयाँ नहीं छपी हैं। मानक इकाइयाँ मानी गई हैं (mg/l, NTU, µS/cm)। BDL का मतलब पहचान-सीमा से नीचे: बहुत कम, शून्य नहीं, गायब नहीं।',
       'खाली, "-", "*" या "**" का मतलब जाँच नहीं हुई। बैरागढ़ कुंड और मालीखेड़ी कुंड की दुर्गा 2025 की तालिका नहीं है, और उनकी गणेश 2025 की जाँच केवल विसर्जन के दौरान की है।',
       '"रानी कमलापति घाट / कमला पार्क कुंड" दो स्थान हो सकते हैं (गणेश तालिकाओं में कमला पार्क कुंड, दुर्गा तालिकाओं में लोअर लेक घाट)।',
-      'NGT ने ऊपरी और निचले तालाब में विसर्जन पर रोक लगाई है और नगर निगम नए घाट बना रहा है। नए घाटों का कोई डेटा यहाँ नहीं है, इसलिए टूल उन्हें क्रम में नहीं रख सकता। 20 अक्टूबर को कौन-से घाट काम में आएँगे, यह नगर निगम तय करे।',
+      'NGT ने ऊपरी और निचले तालाब में विसर्जन पर रोक लगाई है और नगर निगम नए घाट बना रहा है। नए घाटों का कोई डेटा यहाँ नहीं है, इसलिए टूल उन्हें क्रम में नहीं रख सकता। हर विसर्जन में कौन-से घाट काम में आएँगे, यह नगर निगम तय करे।',
       'टूल जाँच-आँकड़ों को मानकों से मिलाता है। स्वास्थ्य पर किसी असर का दावा नहीं करता।'] },
     { h: 'डेटा और स्रोत', p: ['MPPCB की गणेश और दुर्गा विसर्जन रिपोर्टें 2023, 2024 और 2025, जैसी भोपाल इम्पैक्ट लैब 2026 के प्रतिभागी पैक में संकलित हैं (1,524 जाँच-आँकड़े), और CPCB जल-गुणवत्ता मानक। स्रोत लिंक कार्ड के विवरण और README में हैं।'] }
   ]
@@ -380,8 +302,10 @@ const PCFG = {
 };
 
 /* ---------- state ---------- */
-let lang = 'en', basis = D.default_basis, tab = 'rank';
+let lang = 'en', basis = D.default_basis, tab = 'home', pendingScroll = null;
+let U = D.updates || { visarjans: [], updates: [] };
 const openCards = new Set();
+
 try { const s = localStorage.getItem('gw_lang'); if (s === 'hi' || s === 'en') lang = s; } catch (e) {}
 
 const t = k => UI[lang][k];
@@ -391,14 +315,6 @@ const fill = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k]);
 const pageLink = (yr, pg) => `<a href="${esc(D.meta.reports[yr].url)}#page=${pg}" target="_blank" rel="noopener">${t('page')} ${pg}</a>`;
 
 /* ---------- pieces ---------- */
-function daysLeft() {
-  const target = new Date(D.meta.durga_date + 'T00:00:00+05:30').getTime();
-  const n = Math.ceil((target - Date.now()) / 86400000);
-  if (n > 0) return fill(t('days'), { n });
-  if (n === 0 || (n < 0 && n > -1)) return t('today');
-  return '';
-}
-
 function confidenceFor(g, sc) {
   const poss = POSS[basis] || D.meta.expected_per_ghat;
   const c = sc.tested / poss;
@@ -476,81 +392,56 @@ function card(g) {
     ? fill(t('same_rank'), { a: g.rank_range[0] })
     : fill(t('range_rank'), { a: g.rank_range[0], b: g.rank_range[1] });
   const isOpen = openCards.has(g.id) ? ' open' : '';
+  const gi = D.ghats.indexOf(g);
   const years = [...new Set(g.readings.map(r => r.y))];
-  const idx = D.ghats.indexOf(g);
-  const scoreNum = sc.score === null ? null : Math.round(sc.score);
-  const ring = scoreNum === null
-    ? `<div class="ring" style="--pct:0" role="img" aria-label="${esc(t('score'))}: ${esc(t('nodata'))}"><span><i class="nd">${esc(t('nodata'))}</i></span></div>`
-    : `<div class="ring" style="--pct:${sc.score}" role="img" aria-label="${esc(t('score'))} ${scoreNum}/100"><span><b>${scoreNum}</b><small>/100</small></span></div>`;
   return `
-  <article class="card p${pr}" id="g-${idx}">
+  <article class="card p${pr}" id="card-${gi}">
     <div class="card-top">
-      <div class="rankno"><small>#</small>${sc.rank}</div>
+      <div class="rank">${sc.rank}</div>
       <div class="card-main">
         <h2>${esc(g['name_' + lang])}</h2>
         <div class="body-name">${esc(g['body_' + lang])}</div>
-      </div>
-      ${ring}
-    </div>
-    <div class="badges">
-      <span class="badge p${pr}">${esc(t('p' + pr))}</span>
-      <span class="badge${cf.level === 'High' ? '' : ' low'}">${esc(t('conf'))}: ${esc(t(cf.level))}</span>
-      <span class="badge">${esc(rr)}</span>
-    </div>
-    <div class="note used">${esc(t('score'))} · ${esc(fill(t('used'), { a: sc.tested, b: cf.poss }))}</div>
-    <div class="cols">
-      <div>
+        <div class="badges">
+          <span class="badge p${pr}">${esc(t('p' + pr))}</span>
+          <span class="badge${cf.level === 'High' ? '' : ' low'}">${esc(t('conf'))}: ${esc(t(cf.level))}</span>
+          <span class="badge">${esc(rr)}</span>
+        </div>
+        <div class="scorerow"><span>${esc(t('score'))}</span>
+          <div class="bar"><span style="width:${sc.score === null ? 0 : sc.score}%"></span></div>
+          <span class="scorenum">${sc.score === null ? esc(t('nodata')) : Math.round(sc.score)}/100</span></div>
+        <div class="note">${esc(fill(t('used'), { a: sc.tested, b: cf.poss }))}</div>
         <div class="sec">${esc(t('why'))}</div>
         <ul>${g.reasons[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-      </div>
-      <div>
         <div class="sec">${esc(t('todo'))}</div>
-        <ul class="todo">${g.actions[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        <ul>${g.actions[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        <details data-id="${esc(g.id)}"${isOpen}>
+          <summary>${esc(t('details'))}</summary>
+          <div class="sec">${esc(t('gaps'))}</div>
+          ${g.gaps[lang].length ? `<ul>${g.gaps[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : `<p class="note">${esc(t('nogaps'))}</p>`}
+          <p class="note">${esc(t('charts_note'))}</p>
+          <div class="keyrow"><span><i class="dot ok"></i>${esc(t('leg_ok'))}</span><span><i class="dot bad"></i>${esc(t('leg_bad'))}</span><span>× ${esc(t('leg_miss'))}</span><span>▨ ${esc(t('leg_none'))}</span></div>
+          ${['Dissolved oxygen', 'BOD', 'pH'].map(p => `<div class="chart-title">${esc(t(PCFG[p].key))}</div>${chart(g, p)}`).join('')}
+          <div class="chart-title">${esc(t('table'))}</div>
+          ${readingsTable(g)}
+          ${g.metals[lang] ? `<p class="note">${esc(g.metals[lang])}</p>` : ''}
+          <p class="note"><b>${esc(t('sources'))}:</b> ${years.map(y => `<a href="${esc(D.meta.reports[y].url)}" target="_blank" rel="noopener">${esc(D.meta.reports[y].name)}</a>`).join(' · ')}</p>
+        </details>
       </div>
     </div>
-    <details data-id="${esc(g.id)}"${isOpen}>
-      <summary>${esc(t('details'))}</summary>
-      <div class="sec">${esc(t('gaps'))}</div>
-      ${g.gaps[lang].length ? `<ul>${g.gaps[lang].map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : `<p class="note">${esc(t('nogaps'))}</p>`}
-      <p class="note">${esc(t('charts_note'))}</p>
-      <div class="keyrow"><span><i class="dot ok"></i>${esc(t('leg_ok'))}</span><span><i class="dot bad"></i>${esc(t('leg_bad'))}</span><span>× ${esc(t('leg_miss'))}</span><span>▨ ${esc(t('leg_none'))}</span></div>
-      ${['Dissolved oxygen', 'BOD', 'pH'].map(p => `<div class="chart-title">${esc(t(PCFG[p].key))}</div>${chart(g, p)}`).join('')}
-      <div class="chart-title">${esc(t('table'))}</div>
-      ${readingsTable(g)}
-      ${g.metals[lang] ? `<p class="note">${esc(g.metals[lang])}</p>` : ''}
-      <p class="note"><b>${esc(t('sources'))}:</b> ${years.map(y => `<a href="${esc(D.meta.reports[y].url)}" target="_blank" rel="noopener">${esc(D.meta.reports[y].name)}</a>`).join(' · ')}</p>
-    </details>
   </article>`;
 }
 
-function boardView(list) {
-  const vals = list.map(g => g.scores[basis].score || 0);
-  const scale = Math.max(60, Math.ceil(Math.max(...vals) / 10) * 10);
-  const pos = v => (v / scale * 100).toFixed(1) + '%';
-  const rows = list.map(g => {
-    const sc = g.scores[basis];
-    const pr = sc.priority || 3;
-    return `<button class="brow p${pr}" data-jump="g-${D.ghats.indexOf(g)}">
-      <span class="bn">${sc.rank}</span>
-      <span class="bname">${esc(g['name_' + lang])}</span>
-      <span class="btrack"><i style="width:${pos(sc.score || 0)}"></i><b style="left:${pos(D.meta.p2)}"></b><b style="left:${pos(D.meta.p1)}"></b></span>
-      <span class="bscore">${sc.score === null ? '–' : Math.round(sc.score)}</span>
-    </button>`;
-  }).join('');
-  return `<section class="board" aria-label="${esc(t('board'))}">
-    <div class="board-head"><h2>${esc(t('board'))}</h2><span class="note">${esc(t('board_hint'))}</span></div>
-    <div class="brow axis" aria-hidden="true"><span></span><span></span>
-      <span class="axis-track"><em style="left:${pos(D.meta.p2)}">${D.meta.p2}</em><em style="left:${pos(D.meta.p1)}">${D.meta.p1}</em></span><span></span></div>
-    ${rows}
-  </section>`;
-}
-
 function rankView() {
+  const h = D.headline;
   const list = [...D.ghats].sort((a, b) => a.scores[basis].rank - b.scores[basis].rank);
   const b = D.bases.find(x => x.id === basis);
   return `
-  ${boardView(list)}
   <div class="banner">${esc(t('banner'))}</div>
+  <div class="stats">
+    <div class="stat"><b>${h.do_below}/${h.do_tested}</b><span>${esc(t('h_do'))}</span></div>
+    <div class="stat"><b>${h.bod_above}/${h.bod_tested}</b><span>${esc(t('h_bod'))}</span></div>
+    <div class="stat"><b>${h.bairagarh_do_zero}</b><span>${esc(t('h_zero'))}</span></div>
+  </div>
   <div class="basis"><span class="label">${esc(t('basis'))}</span>
     <div class="seg">${D.bases.map(x => `<button data-basis="${x.id}" aria-pressed="${x.id === basis}">${esc(x[lang])}</button>`).join('')}</div>
     <div class="basis-desc">${esc(b['desc_' + lang])}</div></div>
@@ -566,8 +457,6 @@ function briefView() {
     <button class="primary" data-copy="one">${esc(t('copy'))}</button>
     <button class="ghost" data-copy="both">${esc(t('copy_both'))}</button>
     <button class="ghost" data-print="1">${esc(t('print'))}</button>
-    <button class="wa" data-wa="1">${esc(t('wa'))}</button>
-    <button class="ghost" data-csv="1">${esc(t('csv'))}</button>
   </div>
   <pre class="brief" id="brief">${esc(D.brief[lang])}</pre>`;
 }
@@ -579,124 +468,108 @@ function methodView() {
     ${sec.items ? `<ul>${sec.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : ''}`).join('')}</div>`;
 }
 
-const REPO_URL = 'https://github.com/bitCrafterDS/visarjan-ghat-watch';
-const TEAM = { name: 'PromptPirates', members: ['Srishty Singh', 'Deepanshu Singh', 'Kartik Singh'] };
-const MARK = '<span class="mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8c3 0 3-2 6-2s3 2 6 2 3-2 6-2M3 13c3 0 3-2 6-2s3 2 6 2 3-2 6-2M3 18c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/></svg></span>';
-const GH_ICON = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>';
+const MONTHS = { en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+                 hi: ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'] };
+const fmtDate = iso => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${MONTHS[lang][m - 1]} ${y}`; };
+const daysTo = iso => Math.ceil((new Date(iso + 'T00:00:00+05:30').getTime() - Date.now()) / 86400000);
+const safeUrl = u => (/^https?:\/\//.test(u || '') ? u : '');
+const pick = (o, k) => (o[k + '_' + lang] || o[k + '_en'] || '');
 
-function heroView(left) {
-  const h = D.headline;
-  if (tab === 'rank') {
-    return `<div class="hero">
-    <div class="wrap">
-      <h1>${esc(t('hero'))}</h1>
-      <p class="sub">${esc(t('sub'))}</p>
-      ${left ? `<span class="countdown"><i></i>${esc(left)}</span>` : ''}
-      <div class="stats">
-        <div class="stat"><b>${h.do_below}/${h.do_tested}</b><span>${esc(t('h_do'))}</span></div>
-        <div class="stat"><b>${h.bod_above}/${h.bod_tested}</b><span>${esc(t('h_bod'))}</span></div>
-        <div class="stat"><b>${h.bairagarh_do_zero}</b><span>${esc(t('h_zero'))}</span></div>
-      </div>
-    </div>${WAVE}</div>`;
-  }
-  return `<div class="hero compact">
-    <div class="wrap">
-      <h1>${esc(t(tab === 'brief' ? 'tab_brief' : 'tab_method'))}</h1>
-      <p class="sub">${esc(t(tab === 'brief' ? 'brief_note' : 'method_sub'))}</p>
-      ${left ? `<span class="countdown"><i></i>${esc(left)}</span>` : ''}
-    </div>${WAVE}</div>`;
+function upcoming() {
+  return (U.visarjans || []).map(v => Object.assign({ n: daysTo(v.date) }, v)).filter(v => v.n >= 0)
+    .sort((a, b) => (a.date < b.date ? -1 : 1));
 }
-const WAVE = '<svg class="wave" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true"><path class="back" d="M0 22C220 52 440 -6 720 22S1220 48 1440 14V46H0Z"/><path d="M0 34C260 8 520 52 800 32S1230 12 1440 36V46H0Z"/></svg>';
 
-function footerView() {
-  const srcs = Object.keys(D.meta.reports).sort().map(y =>
-    `<li><a href="${esc(D.meta.reports[y].url)}" target="_blank" rel="noopener">${esc(D.meta.reports[y].name)}</a></li>`).join('');
-  return `<footer class="site">
-    <div class="wrap">
-      <div class="foot-grid">
-        <div>
-          <div class="foot-brand">${MARK}<span>${esc(t('title'))}</span></div>
-          <p>${esc(t('f_about'))}</p>
-          <p class="foot-note">${esc(t('f_limits'))}</p>
-        </div>
-        <div>
-          <h3>${esc(t('f_team'))}</h3>
-          <ul><li><b>${esc(TEAM.name)}</b></li>${TEAM.members.map(m => `<li>${esc(m)}</li>`).join('')}</ul>
-          <p style="margin-top:12px">${esc(t('f_event'))}</p>
-        </div>
-        <div>
-          <h3>${esc(t('f_pages'))}</h3>
-          <ul>
-            <li><button class="linkbtn" data-tab="rank">${esc(t('tab_rank'))}</button></li>
-            <li><button class="linkbtn" data-tab="brief">${esc(t('tab_brief'))}</button></li>
-            <li><button class="linkbtn" data-tab="method">${esc(t('tab_method'))}</button></li>
-            <li><a href="${REPO_URL}" target="_blank" rel="noopener">${esc(t('f_code'))}</a></li>
-          </ul>
-          <h3 style="margin-top:16px">${esc(t('f_sources'))}</h3>
-          <ul>${srcs}
-            <li><a href="https://cpcb.gov.in/water-quality-criteria/" target="_blank" rel="noopener">${esc(t('f_cpcb'))}</a></li>
-            <li><a href="https://github.com/Laaaaksh/bhopal-impact-lab-2026" target="_blank" rel="noopener">${esc(t('f_pack'))}</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="foot-bottom">
-        <span>${esc(t('f_lic'))}</span>
-        <span>${esc(fill(t('built'), { d: D.meta.built }))}</span>
-        <button class="linkbtn" data-top="1">${esc(t('f_top'))}</button>
-      </div>
+function homeView() {
+  const h = D.headline;
+  const up = upcoming();
+  const first = [...D.ghats].sort((a, b) => a.scores[D.default_basis].rank - b.scores[D.default_basis].rank).slice(0, 3);
+  const ups = [...(U.updates || [])].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const left = n => (n === 0 ? t('up_today') : n === 1 ? t('up_tomorrow') : fill(t('up_days'), { n }));
+  return `
+  <section class="hero">
+    <h2>${esc(t('home_hero_h'))}</h2>
+    <p>${esc(t('home_hero_p'))}</p>
+  </section>
+  <div class="aud">
+    <div class="audcard">
+      <h3>${esc(t('aud_officer_h'))}</h3><p>${esc(t('aud_officer_p'))}</p>
+      <div class="actions"><button class="primary" data-go="rank">${esc(t('aud_officer_btn'))}</button><button class="ghost" data-go="brief">${esc(t('aud_officer_btn2'))}</button></div>
     </div>
-  </footer>`;
+    <div class="audcard pub">
+      <h3>${esc(t('aud_public_h'))}</h3><p>${esc(t('aud_public_p'))}</p>
+      <div class="actions"><button class="primary" data-go="public">${esc(t('aud_public_btn'))}</button></div>
+    </div>
+  </div>
+  <div class="h2">${esc(t('up_h'))}</div>
+  ${up.length ? `<div class="vis">${up.map((v, i) => `
+    <div class="viscard${i === 0 ? ' next' : ''}">
+      ${i === 0 ? `<span class="badge p3">${esc(t('up_next'))}</span>` : ''}
+      <div class="vname">${esc(pick(v, 'name'))}</div>
+      <div class="vdate">${esc(fmtDate(v.date))}${pick(v, 'note') ? ' · ' + esc(pick(v, 'note')) : ''}</div>
+      <div class="vleft">${esc(left(v.n))}</div>
+      ${safeUrl(v.source) ? `<a class="note" href="${esc(safeUrl(v.source))}" target="_blank" rel="noopener">${esc(t('up_src'))}</a>` : ''}
+    </div>`).join('')}</div>
+    <p class="note">${esc(t('up_note'))}</p>` : `<p class="note">${esc(t('up_none'))}</p>`}
+  <div class="h2">${esc(t('upd_h'))}</div>
+  ${ups.length ? ups.map(u => `
+    <div class="upd"><span class="ud">${esc(fmtDate(u.date))}</span><b>${esc(pick(u, 'title'))}</b>
+      <span>${esc(pick(u, 'text'))}</span>
+      ${safeUrl(u.link) ? ` <a href="${esc(safeUrl(u.link))}" target="_blank" rel="noopener">${esc(t('upd_link'))}</a>` : ''}</div>`).join('') : `<p class="note">${esc(t('upd_none'))}</p>`}
+  <div class="h2">${esc(t('first_h'))}</div>
+  <p class="note">${esc(t('first_p'))}</p>
+  <ol class="first">${first.map(g => `<li><b>${esc(g['name_' + lang])}</b> (${Math.round(g.scores[D.default_basis].score)}/100)<br><span class="note">${esc(g.reasons[lang][0] || '')}</span></li>`).join('')}</ol>
+  <div class="actions"><button class="ghost" data-go="rank">${esc(t('first_all'))}</button></div>
+  <div class="stats">
+    <div class="stat"><b>${h.do_below}/${h.do_tested}</b><span>${esc(t('h_do'))}</span></div>
+    <div class="stat"><b>${h.bod_above}/${h.bod_tested}</b><span>${esc(t('h_bod'))}</span></div>
+    <div class="stat"><b>${h.bairagarh_do_zero}</b><span>${esc(t('h_zero'))}</span></div>
+  </div>`;
+}
+
+function publicView() {
+  const rows = [...D.ghats].map(g => ({ g, i: D.ghats.indexOf(g) })).sort((a, b) => a.g.name_en.localeCompare(b.g.name_en));
+  return `
+  <h2 class="h2" style="margin-top:4px">${esc(t('pub_h'))}</h2>
+  <p>${esc(t('pub_intro'))}</p>
+  <div class="h2">${esc(t('pub_what_h'))}</div>
+  <ul>${t('pub_what').map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+  <div class="h2">${esc(t('pub_table_h'))}</div>
+  ${rows.map(({ g, i }) => `<div class="upd">
+    <b>${esc(g['name_' + lang])}</b><span class="ud">${esc(g['body_' + lang])}</span>
+    <div>${esc(t('pub_col_do'))}: <b style="display:inline">${esc(fill(t('pub_tests'), { a: g.m.do_below, b: g.m.do_tested }))}</b></div>
+    <div>${esc(t('pub_col_bod'))}: <b style="display:inline">${esc(fill(t('pub_tests'), { a: g.m.bod_above, b: g.m.bod_tested }))}</b></div>
+    <div class="actions"><button class="ghost" data-open="${i}">${esc(t('pub_open'))}</button></div></div>`).join('')}
+  <div class="banner" style="margin-top:16px"><b>${esc(t('pub_note_h'))}</b><ul>${t('pub_notes').map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
 }
 
 function shell() {
-  const left = daysLeft();
   return `
-  <header class="site">
-    <div class="wrap bar">
-      <button class="brand" data-tab="rank" aria-label="${esc(t('title'))}">${MARK}<span>${esc(t('title'))}</span></button>
-      <nav class="tabs" role="tablist">
-        ${[['rank', 'tab_rank'], ['brief', 'tab_brief'], ['method', 'tab_method']].map(([k, l]) =>
-          `<button role="tab" data-tab="${k}" aria-selected="${tab === k}">${esc(t(l))}</button>`).join('')}
-      </nav>
-      <div class="hdr-right">
-        <a class="gh" href="${REPO_URL}" target="_blank" rel="noopener">${GH_ICON}<span>${esc(t('f_gh'))}</span></a>
-        <div class="lang" role="group" aria-label="Language">
-          <button data-lang="en" aria-pressed="${lang === 'en'}">EN</button>
-          <button data-lang="hi" aria-pressed="${lang === 'hi'}">हिं</button>
-        </div>
-      </div>
+  <header>
+    <div>
+      <h1>🌊 ${esc(t('title'))}</h1>
+      <p class="sub">${esc(t('sub'))}</p>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="en" aria-pressed="${lang === 'en'}">EN</button>
+      <button data-lang="hi" aria-pressed="${lang === 'hi'}">हिं</button>
     </div>
   </header>
-  ${heroView(left)}
-  <div class="wrap main-wrap">
-    <main class="${tab}">${tab === 'rank' ? rankView() : tab === 'brief' ? briefView() : methodView()}</main>
-  </div>
-  ${footerView()}`;
+  <nav class="tabs" role="tablist">
+    ${[['home', 'tab_home'], ['rank', 'tab_rank'], ['public', 'tab_public'], ['brief', 'tab_brief'], ['method', 'tab_method']].map(([k, l]) =>
+      `<button role="tab" data-tab="${k}" aria-selected="${tab === k}">${esc(t(l))}</button>`).join('')}
+  </nav>
+  <main>${tab === 'home' ? homeView() : tab === 'rank' ? rankView() : tab === 'public' ? publicView() : tab === 'brief' ? briefView() : methodView()}</main>
+  <footer>${esc(fill(t('built'), { d: D.meta.built }))}</footer>`;
 }
 
-const LIVE_URL = 'https://bitcrafterds.github.io/visarjan-ghat-watch/';
-function sortedGhats() { return [...D.ghats].sort((a, b) => a.scores[D.default_basis].rank - b.scores[D.default_basis].rank); }
-function waMessage() {
-  const hi = lang === 'hi';
-  const lines = [hi ? 'विसर्जन घाट वॉच: दुर्गा विसर्जन 20 अक्टूबर 2026' : 'Visarjan Ghat Watch: Durga visarjan, 20 October 2026',
-                 hi ? 'प्राथमिकता क्रम (सापेक्ष, सुरक्षित/असुरक्षित नहीं):' : 'Priority order (relative, not safe/unsafe):'];
-  sortedGhats().forEach(g => {
-    const sc = g.scores[D.default_basis];
-    lines.push(sc.rank + '. ' + g['name_' + lang] + ' - ' + (sc.score === null ? '-' : Math.round(sc.score)) + '/100 (P' + (sc.priority || 3) + ')');
-  });
-  lines.push('', (hi ? 'पूरी रिपोर्ट और हर संख्या का रिपोर्ट-पेज: ' : 'Full brief and report page behind every number: ') + LIVE_URL);
-  return lines.join('\n');
-}
-function downloadCsv() {
-  const q = v => '"' + String(v).replace(/"/g, '""') + '"';
-  const rows = [['rank', 'ghat', 'risk_score_0_100', 'priority', 'readings_used', 'data_confidence']];
-  [...D.ghats].sort((a, b) => a.scores[basis].rank - b.scores[basis].rank).forEach(g => {
-    const sc = g.scores[basis];
-    rows.push([sc.rank, g.name_en, sc.score === null ? '' : sc.score, sc.priority || 3, sc.tested, g.confidence]);
-  });
-  const blob = new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ghat_risk_ranking_' + basis + '.csv';
-  document.body.appendChild(a); a.click(); a.remove();
+async function loadUpdates() {
+  try {
+    const r = await fetch('updates.json?' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return;
+    const j = await r.json();
+    if (j && Array.isArray(j.visarjans) && Array.isArray(j.updates)) { U = j; render(); }
+  } catch (e) { /* offline or a bad edit: keep the copy built into this page */ }
 }
 
 async function copyText(txt, btn) {
@@ -712,6 +585,7 @@ async function copyText(txt, btn) {
 function render() {
   document.documentElement.lang = lang;
   document.getElementById('app').innerHTML = shell();
+  if (pendingScroll) { const el = document.getElementById(pendingScroll); pendingScroll = null; if (el) el.scrollIntoView({ block: 'start' }); }
 }
 
 document.addEventListener('click', e => {
@@ -719,19 +593,11 @@ document.addEventListener('click', e => {
   if (!b) return;
   if (b.dataset.lang) { lang = b.dataset.lang; try { localStorage.setItem('gw_lang', lang); } catch (_) {} render(); }
   else if (b.dataset.tab) { tab = b.dataset.tab; render(); window.scrollTo(0, 0); }
-  else if (b.dataset.top) { window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
+  else if (b.dataset.go) { tab = b.dataset.go; render(); window.scrollTo(0, 0); }
+  else if (b.dataset.open !== undefined) { openCards.add(D.ghats[+b.dataset.open].id); tab = 'rank'; pendingScroll = 'card-' + b.dataset.open; render(); }
   else if (b.dataset.basis) { basis = b.dataset.basis; render(); }
   else if (b.dataset.copy) { copyText(b.dataset.copy === 'both' ? D.brief.en + '\n\n' + '────────\n\n' + D.brief.hi : D.brief[lang], b); }
   else if (b.dataset.print) { window.print(); }
-  else if (b.dataset.wa) { window.open('https://wa.me/?text=' + encodeURIComponent(waMessage()), '_blank', 'noopener'); }
-  else if (b.dataset.csv) { downloadCsv(); }
-  else if (b.dataset.jump) {
-    const el = document.getElementById(b.dataset.jump);
-    if (el) {
-      el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-      el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
-    }
-  }
 });
 document.addEventListener('toggle', e => {
   const d = e.target;
@@ -739,6 +605,7 @@ document.addEventListener('toggle', e => {
 }, true);
 
 render();
+loadUpdates();
 </script>
 </body>
 </html>
