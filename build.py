@@ -11,7 +11,7 @@ Writes docs/index.html            (self-contained page, opens offline, can be ho
 import csv
 import json
 import os
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 import scoring as S
 import texts as T
@@ -21,6 +21,27 @@ DATA = os.path.join(ROOT, "data", "bhopal_ghats_2023_2025.csv")
 TEMPLATE = os.path.join(ROOT, "src", "template.html")
 OUT_HTML = os.path.join(ROOT, "docs", "index.html")
 OUT_DIR = os.path.join(ROOT, "output")
+UPDATES = os.path.join(ROOT, "docs", "updates.json")
+
+MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+MONTHS_HI = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
+
+
+def load_updates():
+    with open(UPDATES, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def next_event_text(updates):
+    """The next visarjan (today or later) as one line in English and Hindi, for the brief."""
+    today = date.today()
+    future = sorted((v for v in updates.get("visarjans", []) if date.fromisoformat(v["date"]) >= today), key=lambda v: v["date"])
+    if not future:
+        return None
+    v = future[0]
+    d = date.fromisoformat(v["date"])
+    return {"en": "Next visarjan: %s, %d %s %d" % (v["name_en"], d.day, MONTHS_EN[d.month - 1], d.year),
+            "hi": "अगला विसर्जन: %s, %d %s %d" % (v["name_hi"], d.day, MONTHS_HI[d.month - 1], d.year)}
 
 REPORTS = {
     2023: {"name": "MPPCB Idol Immersion Report 2023 (CPCB format)",
@@ -38,8 +59,8 @@ BASIS_TEXT = {
                 "desc_hi": "गणेश और दुर्गा, 2023 से 2025। 2025 के आँकड़े 3 गुना, 2024 के 2 गुना, 2023 के 1 गुना गिने गए।"},
     "durga":   {"en": "Durga visarjan only",
                 "hi": "केवल दुर्गा विसर्जन",
-                "desc_en": "Only the Durga tests (the festival coming on 20 October), recent years weighted more.",
-                "desc_hi": "केवल दुर्गा की जाँच (20 अक्टूबर को आने वाला त्योहार), हाल के वर्षों को अधिक महत्व।"},
+                "desc_en": "Only the Durga tests, recent years weighted more.",
+                "desc_hi": "केवल दुर्गा की जाँच, हाल के वर्षों को अधिक महत्व।"},
     "latest":  {"en": "Latest year (2025) only",
                 "hi": "केवल सबसे नया वर्ष (2025)",
                 "desc_en": "Only 2025 readings. Two ghats have very few 2025 readings, so read their rank with care.",
@@ -47,7 +68,8 @@ BASIS_TEXT = {
 }
 
 
-def main():
+def compute():
+    """Compute scores, ranks and the payload shown in the page. No files are written here."""
     rows = S.load_rows(DATA)
     by_site = S.group_by_site(rows)
     head = S.headline(rows)
@@ -91,11 +113,12 @@ def main():
                         for g in default]
     last = default[-1]
     lowest_fail = (last["m"]["do_below"] + last["m"]["bod_above"] + last["m"]["ph_out"], last["scored_tested"])
-    brief = T.build_brief(head, ranked_for_brief, lowest_fail)
+    updates = load_updates()
+    brief = T.build_brief(head, ranked_for_brief, lowest_fail, next_event_text(updates))
 
     payload = {
         "meta": {"built": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                 "durga_date": "2026-10-20", "reports": REPORTS,
+                 "reports": REPORTS,
                  "expected_per_ghat": S.EXPECTED,
                  "p1": S.P1_MIN, "p2": S.P2_MIN},
         "headline": dict(head, bairagarh_do_zero=next(g["m"]["do_zero"] for g in ghats if g["id"].startswith("Bairagarh"))),
@@ -103,8 +126,14 @@ def main():
         "default_basis": S.DEFAULT_BASIS,
         "ghats": ghats,
         "brief": brief,
+        "updates": updates,
     }
+    return payload, default, ranks
 
+
+def main():
+    payload, default, ranks = compute()
+    brief = payload["brief"]
     os.makedirs(OUT_DIR, exist_ok=True)
     os.makedirs(os.path.dirname(OUT_HTML), exist_ok=True)
 

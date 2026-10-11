@@ -72,8 +72,8 @@ def actions(m, missing_events, partial):
         en.append("Plan extra cleaning of organic waste and immersion material (BOD is repeatedly above the limit).")
         hi.append("जैविक कचरे और विसर्जन-सामग्री की अतिरिक्त सफाई की योजना बनाएँ (BOD बार-बार सीमा से ऊपर है)।")
     if missing_events or partial or m["coverage"] < 0.9:
-        en.append("Test before 20 October to fill the data gaps.")
-        hi.append("डेटा की कमियों को भरने के लिए 20 अक्टूबर से पहले जाँच कराएँ।")
+        en.append("Test before the next visarjan to fill the data gaps.")
+        hi.append("डेटा की कमियों को भरने के लिए अगले विसर्जन से पहले जाँच कराएँ।")
     if m["medium_site_match"]:
         en.append("Confirm with MPPCB whether Kamla Park kund and Lower Lake ghat are the same place.")
         hi.append("MPPCB से पुष्टि करें कि कमला पार्क कुंड और लोअर लेक घाट एक ही स्थान हैं या नहीं।")
@@ -112,10 +112,10 @@ def metals_note(m):
     return {"en": en, "hi": hi}
 
 
-def build_brief(head, ranked, lowest_fail):
+def build_brief(head, ranked, lowest_fail, next_event=None):
     """ranked: list of dicts (default basis order) with name_en, name_hi, score, m, actions."""
     en = ["VISARJAN GHAT WATCH: brief for the BMC officer",
-          "Durga Visarjan: 20 October 2026",
+          next_event["en"] if next_event else "",
           "",
           "Basis: MPPCB water tests at 7 Bhopal ghats, 2023 to 2025, compared with CPCB class B (outdoor bathing) limits: "
           "dissolved oxygen (DO) 5 mg/l or more, BOD 3 mg/l or less, pH 6.5 to 8.5.",
@@ -125,7 +125,7 @@ def build_brief(head, ranked, lowest_fail):
           "",
           "Ranking (relative priority for extra cleaning, aeration and testing):"]
     hi = ["विसर्जन घाट वॉच: नगर निगम अधिकारी के लिए संक्षिप्त रिपोर्ट",
-          "दुर्गा विसर्जन: 20 अक्टूबर 2026",
+          next_event["hi"] if next_event else "",
           "",
           "आधार: भोपाल के 7 घाटों पर MPPCB की 2023 से 2025 की जल-जाँच, CPCB श्रेणी-B (खुले में स्नान) के मानकों से तुलना: "
           "घुली ऑक्सीजन (DO) 5 mg/l या अधिक, BOD 3 mg/l या कम, pH 6.5 से 8.5।",
@@ -140,8 +140,8 @@ def build_brief(head, ranked, lowest_fail):
                   % (i, g["name_en"], round(g["score"]), m["do_below"], m["do_tested"], m["bod_above"], m["bod_tested"]))
         hi.append("%d. %s, अंक %d/100: DO मानक से कम %d में से %d जाँच में, BOD मानक से अधिक %d में से %d जाँच में।"
                   % (i, g["name_hi"], round(g["score"]), m["do_tested"], m["do_below"], m["bod_tested"], m["bod_above"]))
-    en += ["", "Suggested before 20 October:"]
-    hi += ["", "20 अक्टूबर से पहले सुझाव:"]
+    en += ["", "Suggested before the next visarjan:"]
+    hi += ["", "अगले विसर्जन से पहले सुझाव:"]
     for g in ranked[:3]:
         en.append("- %s: %s" % (g["name_en"], " ".join(g["actions"]["en"])))
         hi.append("- %s: %s" % (g["name_hi"], " ".join(g["actions"]["hi"])))
