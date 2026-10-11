@@ -1,6 +1,6 @@
 # CLAUDE.md: handoff for Claude Code
 
-Project: **Visarjan Ghat Watch** (Claude Impact Lab Bhopal, Track 2, 11 Oct 2026). Submission deadline: **5:00 PM IST, 11 Oct 2026**, public GitHub repo + optional 2-minute recording.
+Project: **GhatWise (Visarjan Ghat Watch)** (Claude Impact Lab Bhopal, Track 2, 11 Oct 2026). Submission deadline: **5:00 PM IST, 11 Oct 2026**, public GitHub repo + optional 2-minute recording.
 
 The person working with you is a **beginner**. Explain in simple Hinglish (Hindi + English), one step at a time, and say exactly which command to run. Keep answers short.
 

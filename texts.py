@@ -114,7 +114,7 @@ def metals_note(m):
 
 def build_brief(head, ranked, lowest_fail, next_event=None):
     """ranked: list of dicts (default basis order) with name_en, name_hi, score, m, actions."""
-    en = ["VISARJAN GHAT WATCH: brief for the BMC officer",
+    en = ["GHATWISE: ghat water-risk brief for the BMC officer",
           next_event["en"] if next_event else "",
           "",
           "Basis: MPPCB water tests at 7 Bhopal ghats, 2023 to 2025, compared with CPCB class B (outdoor bathing) limits: "
@@ -124,7 +124,7 @@ def build_brief(head, ranked, lowest_fail, next_event=None):
           % (head["do_below"], head["do_tested"], head["bod_above"], head["bod_tested"]),
           "",
           "Ranking (relative priority for extra cleaning, aeration and testing):"]
-    hi = ["विसर्जन घाट वॉच: नगर निगम अधिकारी के लिए संक्षिप्त रिपोर्ट",
+    hi = ["घाटवाइज़: नगर निगम अधिकारी के लिए घाट जल-जोखिम की संक्षिप्त रिपोर्ट",
           next_event["hi"] if next_event else "",
           "",
           "आधार: भोपाल के 7 घाटों पर MPPCB की 2023 से 2025 की जल-जाँच, CPCB श्रेणी-B (खुले में स्नान) के मानकों से तुलना: "
